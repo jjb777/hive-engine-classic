@@ -20,25 +20,19 @@
     <script src="scripts/footable.min.js"></script>
     <link rel="stylesheet" href="styles/footable.bootstrap.min.css" />
     <script src="scripts/steem.min.js"></script>
+
+    <script src="scripts/Config.js"></script>
+    <script src="scripts/init.js"></script>
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/SE.js"></script>
+    <script src="scripts/render.js"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <link rel="stylesheet" href="styles/main.css?v=25062019" />
     <link rel="stylesheet" href="styles/mobile.css?v=23062019" />
     <title>Steem Engine - Smart Contracts on the STEEM blockchain</title>
-
-
-    <script type="text/javascript">
-        var cacheBust = ['scripts/Config.js', 'scripts/init.js', 'scripts/utils.js', 'scripts/SE.js', 'scripts/render.js'];
-        for (i = 0; i < cacheBust.length; i++) {
-            var el = document.createElement('script');
-            el.src = cacheBust[i] + "?v=" + Math.random();
-
-            setTimeout(() => {
-                document.getElementsByTagName('head')[0].appendChild(el);
-            }, 300);
-        }
-    </script>
 </head>
 
 <body>
