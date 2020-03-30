@@ -33,7 +33,10 @@
         for (i = 0; i < cacheBust.length; i++) {
             var el = document.createElement('script');
             el.src = cacheBust[i] + "?v=" + Math.random();
-            document.getElementsByTagName('head')[0].appendChild(el);
+
+            setTimeout(() => {
+                document.getElementsByTagName('head')[0].appendChild(el);
+            }, 300);
         }
     </script>
 </head>
