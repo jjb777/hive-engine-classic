@@ -1,69 +1,67 @@
-
 <div class="modal-dialog modal-dialog-centered modal-lg">
-	<div class="modal-content blue">
-		<div class="modal-header" style="padding: 40px 40px 10px 60px;">
-			<h1 class="modal-title" style="font-size: 38px;">
-				DEPOSIT TOKENS
-				<div class="note">There is a 1% fee on deposits and withdrawals.</div>
-			</h1>
-			
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <div class="modal-content blue">
+        <div class="modal-header" style="padding: 40px 40px 10px 60px;">
+            <h1 class="modal-title" style="font-size: 38px;">
+                DEPOSIT TOKENS
+                <div class="note">There is a 1% fee on deposits and withdrawals.</div>
+            </h1>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				<span aria-hidden="true">X</span>
-			</button>  
-		</div>
+			</button>
+        </div>
 
-		<div class="modal-body">	
-			<div class="note" style="text-align: left; margin-bottom: 20px;">
-				Choose which token you would like to deposit below. For more information about depositing or withdrawing external tokens to Steem Engine please <a href="/?p=faq" target="_blank">see the FAQ</a>.
-			</div>		
+        <div class="modal-body">
+            <div class="note" style="text-align: left; margin-bottom: 20px;">
+                Choose which token you would like to deposit below. For more information about depositing or withdrawing external tokens to Hive Engine please <a href="/?p=faq" target="_blank">see the FAQ</a>.
+            </div>
 
-			<label>DEPOSIT TOKEN</label>
-			<div class="input-group">
-				<select id="deposit_token">
+            <label>DEPOSIT TOKEN</label>
+            <div class="input-group">
+                <select id="deposit_token">
 					<% Config.PEGGED_TOKENS.forEach(token => { %>
 						<option value="<%= token.symbol %>"><%= token.name %> (<%= token.symbol %>)</option>
 					<% }); %>
 				</select>
-			</div>				
-		</div>
-		
-		<div class="modal-footer" style="padding-bottom: 0;">
-			<button id="btnBuy" type="button" class="btn btn-primary btn-lg w-100" onclick="getDepositInfoClick()">GET DEPOSIT INFO</button>
-		</div>
+            </div>
+        </div>
 
-		<div class="privex">
-			<a href="https://pay.privex.io/order/?r=steem-engine" target="_blank">
-				<img src="https://www.privex.io/static/assets/svg/privex_ctc_api_light.svg" />
-			</a>
-		</div>
-	</div>
+        <div class="modal-footer" style="padding-bottom: 0;">
+            <button id="btnBuy" type="button" class="btn btn-primary btn-lg w-100" onclick="getDepositInfoClick()">GET DEPOSIT INFO</button>
+        </div>
+
+        <div class="privex">
+            <a href="https://pay.privex.io/order/?r=steem-engine" target="_blank">
+                <img src="https://www.privex.io/static/assets/svg/privex_ctc_api_light.svg" />
+            </a>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
-	function getDepositInfoClick() {  
-		if($('#deposit_token').val() == 'STEEM') {
-			SE.ShowDialog('deposit_steem');
-			return;
-		}
+    function getDepositInfoClick() {
+        if ($('#deposit_token').val() == 'HIVE') {
+            SE.ShowDialog('deposit_steem');
+            return;
+        }
 
-		SE.ShowLoading();
+        SE.ShowLoading();
 
-		SE.GetDepositAddress($('#deposit_token').val(), result => {
-			SE.HideLoading();
+        SE.GetDepositAddress($('#deposit_token').val(), result => {
+            SE.HideLoading();
 
-			if (result && result.address) {
-				SE.ShowDialog('deposit_info', result);
-				return;
-			}
+            if (result && result.address) {
+                SE.ShowDialog('deposit_info', result);
+                return;
+            }
 
-			if (result && result.memo) {
-				SE.ShowDialog('deposit_info', result);
-				return;
-			}
-		});
-	}
+            if (result && result.memo) {
+                SE.ShowDialog('deposit_info', result);
+                return;
+            }
+        });
+    }
 
-	if('<%= data && data.symbol ? data.symbol : "" %>' != '')
-		$('#deposit_token').val('<%= data && data.symbol ? data.symbol : "" %>');
+    if ('<%= data && data.symbol ? data.symbol : "" %>' != '')
+        $('#deposit_token').val('<%= data && data.symbol ? data.symbol : "" %>');
 </script>
-

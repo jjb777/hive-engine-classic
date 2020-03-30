@@ -1188,7 +1188,7 @@ SE = {
             registration_data.contractPayload.url = url;
 
         if (useKeychain()) {
-            hive_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(registration_data), 'Steem Engine Token Registration', function(response) {
+            hive_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(registration_data), 'Hive Engine Token Registration', function(response) {
                 if (response.success && response.result) {
                     SE.CheckTransaction(response.result.id, 3, tx => {
                         if (tx.success)
@@ -1358,7 +1358,7 @@ SE = {
                             SE.ShowToast(true, 'Purchase transaction sent successfully.');
                             SE.HideLoading();
                             SE.HideDialog();
-                            SE.LoadBalances(SE.User.name, () => SE.ShowHistory(Config.NATIVE_TOKEN, 'Steem Engine Tokens'));
+                            SE.LoadBalances(SE.User.name, () => SE.ShowHistory(Config.NATIVE_TOKEN, 'Hive Engine Tokens'));
                         } else
                             SE.ShowToast(false, 'An error occurred purchasing SSC: ' + tx.error);
                     });
@@ -1368,7 +1368,7 @@ SE = {
         } else {
             SE.HideLoading();
             SE.SteemConnectTransfer(SE.User.name, 'steemsc', (amount).toFixedNoRounding(3) + ' HIVE', JSON.stringify(transaction_data), () => {
-                SE.LoadBalances(SE.User.name, () => SE.ShowHistory(Config.NATIVE_TOKEN, 'Steem Engine Tokens'));
+                SE.LoadBalances(SE.User.name, () => SE.ShowHistory(Config.NATIVE_TOKEN, 'Hive Engine Tokens'));
             });
         }
     },

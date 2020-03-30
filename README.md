@@ -1,3 +1,3 @@
-# Steem Engine
+# Hive Engine
 
-Website for the Steem Smart Contracts project and dex: https://steem-engine.com
+Website for the Hive Smart Contracts project and dex: https://hive-engine.com

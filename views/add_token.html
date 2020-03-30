@@ -1,104 +1,105 @@
 <header>
-  <h1>CREATE A TOKEN</h1>
-  <p>Are you ready to make history? Let’s make a new token on the Steem blockchain!</p>
+    <h1>CREATE A TOKEN</h1>
+    <p>Are you ready to make history? Let’s make a new token on the Hive blockchain!</p>
 </header>
 
 <div class="register container text-left">
-  <p>
-		<span class="font-weight-bold">NOTE: Token Creation costs <%= addCommas(SE.Params.tokenCreationFee) + ' ' + Config.NATIVE_TOKEN %> (Steem Engine Native Tokens)</span></br>
-		Your Current ENG Balance: <%= addCommas(SE.GetBalance(Config.NATIVE_TOKEN)) + ' ' + Config.NATIVE_TOKEN %> (<a href="javascript:void(0);" onclick="SE.ShowBuySSC();" style="color: #8E4A2C; font-weight: bold;">BUY ENG with STEEM</a>)
-  </p>  
+    <p>
+        <span class="font-weight-bold">NOTE: Token Creation costs <%= addCommas(SE.Params.tokenCreationFee) + ' ' + Config.NATIVE_TOKEN %> (Hive Engine Native Tokens)</span></br>
+        Your Current BEE Balance:
+        <%= addCommas(SE.GetBalance(Config.NATIVE_TOKEN)) + ' ' + Config.NATIVE_TOKEN %> (<a href="javascript:void(0);" onclick="SE.ShowBuySSC();" style="color: #8E4A2C; font-weight: bold;">BUY BEE with HIVE</a>)
+    </p>
 </div>
 
 
 <div class="register container" style="margin-bottom: 0px;">
-  <div class="row">
-    <div class="col">
-      
-      <div class="group">
-        <label>Token Name</label>
-        <input type="text" id="txtTokenName" maxlength="100" >        
-        <div class="invalid-feedback">
-          Required field. Alpha-numeric characters and spaces only.
-        </div>
-      </div>
+    <div class="row">
+        <div class="col">
 
-      <div class="group">
-        <label>URL</label>
-        <input type="text" id="txtURL" maxlength="255">
-      </div>
+            <div class="group">
+                <label>Token Name</label>
+                <input type="text" id="txtTokenName" maxlength="100">
+                <div class="invalid-feedback">
+                    Required field. Alpha-numeric characters and spaces only.
+                </div>
+            </div>
 
-      <div class="group">
-        <label>Decimal Precision</label>
-        <input type="number" id="txtDecimalPrecision" placeholder="0-8" min="0" max="8" step="1" maxlength="1"> 
-        <div class="invalid-feedback">
-          Please enter a number from 0 to 8
+            <div class="group">
+                <label>URL</label>
+                <input type="text" id="txtURL" maxlength="255">
+            </div>
+
+            <div class="group">
+                <label>Decimal Precision</label>
+                <input type="number" id="txtDecimalPrecision" placeholder="0-8" min="0" max="8" step="1" maxlength="1">
+                <div class="invalid-feedback">
+                    Please enter a number from 0 to 8
+                </div>
+            </div>
         </div>
-      </div>
+
+        <div class="col d-flex flex-column justify-content-top align-items-left">
+            <div class="group">
+                <label>Symbol</label>
+                <input type="text" id="txtSymbol" style="text-transform: uppercase;" maxlength="10">
+                <div class="invalid-feedback">
+                    Required
+                </div>
+            </div>
+
+            <div class="group">
+                <label>Max Supply</label>
+                <input type="number" id="txtMaxSupply" min="0" max="9007199254740991" maxlength="30">
+                <div class="invalid-feedback">
+                    Please enter a number from 1 to 9007199254740991
+                </div>
+            </div>
+
+            <div class="group">
+                <button class="btn btn-primary btn-lg" onclick="btnSubmitClick();" style="margin: auto;">SUBMIT</button>
+            </div>
+        </div>
     </div>
-
-    <div class="col d-flex flex-column justify-content-top align-items-left">
-      <div class="group">
-        <label>Symbol</label>
-        <input type="text" id="txtSymbol" style="text-transform: uppercase;" maxlength="10">        
-        <div class="invalid-feedback">
-          Required
-        </div>
-      </div>
-
-      <div class="group">
-        <label>Max Supply</label>
-        <input type="number" id="txtMaxSupply" min="0" max="9007199254740991" maxlength="30">
-        <div class="invalid-feedback">
-          Please enter a number from 1 to 9007199254740991
-        </div>
-			</div>
-			
-			<div class="group">
-				<button class="btn btn-primary btn-lg" onclick="btnSubmitClick();" style="margin: auto;">SUBMIT</button>
-			</div>
-    </div>
-  </div>      
 </div>
 
 <script>
-  function btnSubmitClick() {
-    var tokenName = $("#txtTokenName").val();
-    var symbol = $("#txtSymbol").val();
-    var precision = parseInt($("#txtDecimalPrecision").val());    
-    var maxSupply = parseInt($("#txtMaxSupply").val());
-    var url = $("#txtURL").val();
-    var isValid = true;
+    function btnSubmitClick() {
+        var tokenName = $("#txtTokenName").val();
+        var symbol = $("#txtSymbol").val();
+        var precision = parseInt($("#txtDecimalPrecision").val());
+        var maxSupply = parseInt($("#txtMaxSupply").val());
+        var url = $("#txtURL").val();
+        var isValid = true;
 
-		var regex = /[^a-zA-Z0-9\s]+/
-    if(tokenName.trim() == '' || regex.test(tokenName)) {
-      $('#txtTokenName').addClass("is-invalid");
-      isValid = false;
+        var regex = /[^a-zA-Z0-9\s]+/
+        if (tokenName.trim() == '' || regex.test(tokenName)) {
+            $('#txtTokenName').addClass("is-invalid");
+            isValid = false;
+        }
+
+        if (symbol.trim() == '') {
+            $('#txtSymbol').addClass("is-invalid");
+            isValid = false;
+        }
+
+        if (isNaN(precision) || precision < 0 || precision > 8) {
+            $('#txtDecimalPrecision').addClass("is-invalid");
+            isValid = false;
+        }
+
+        if (isNaN(maxSupply) || maxSupply < 0 || maxSupply > 9007199254740991) {
+            $('#txtMaxSupply').addClass("is-invalid");
+            isValid = false;
+        }
+
+        if (SE.GetBalance(Config.NATIVE_TOKEN) < SE.Params.tokenCreationFee) {
+            SE.ShowToast(false, 'You must have at least ' + SE.Params.tokenCreationFee + ' ' + Config.NATIVE_TOKEN + ' to create a token.');
+            isValid = false;
+        }
+
+        if (isValid) {
+            $('.register input').removeClass("is-invalid");
+            SE.ShowConfirmAddToken(tokenName, symbol, precision, maxSupply, url);
+        }
     }
-
-    if(symbol.trim() == '') {
-      $('#txtSymbol').addClass("is-invalid");
-      isValid = false;
-    }
-
-    if(isNaN(precision) || precision < 0 || precision > 8) {
-      $('#txtDecimalPrecision').addClass("is-invalid");
-      isValid = false;
-    }
-
-    if(isNaN(maxSupply) || maxSupply < 0 || maxSupply > 9007199254740991) {
-      $('#txtMaxSupply').addClass("is-invalid");
-      isValid = false;
-		}
-		
-		if(SE.GetBalance(Config.NATIVE_TOKEN) < SE.Params.tokenCreationFee) {
-      SE.ShowToast(false, 'You must have at least ' + SE.Params.tokenCreationFee + ' ' + Config.NATIVE_TOKEN + ' to create a token.');			
-			isValid = false;
-		}
-
-    if(isValid) {
-      $('.register input').removeClass("is-invalid");
-      SE.ShowConfirmAddToken(tokenName, symbol, precision, maxSupply, url);    
-    }
-  }
 </script>

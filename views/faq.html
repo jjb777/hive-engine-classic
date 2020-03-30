@@ -1,444 +1,415 @@
 <header>
-  <h1>FAQ</h1>
+    <h1>FAQ</h1>
 </header>
 
 <div class="container">
-		<div class="faq-content">
-			<div class="faq-section-title">GENERAL</div>
+    <div class="faq-content">
+        <div class="faq-section-title">GENERAL</div>
 
-			<div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading1">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion1" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
-								What is Steem Engine?
+        <div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading1">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion1" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
+								What is Hive Engine?
 							</a>
-						</h4>
-					</div>
-					<div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
-						<div class="panel-body">
-							Steem Engine is a smart contracts side-chain platform for the Steem blockchain. This means that it can execute custom smart contracts based on data published 
-							to the Steem blockchain. This allows us to do things that are not currently supported by the Steem blockchain, such as creating custom tokens, or literally
-							anything else achievable with a smart contract.
-						</div>
-					</div>
-				</div>
-			</div>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
+                    <div class="panel-body">
+                        Hive Engine is a smart contracts side-chain platform for the Steem blockchain. This means that it can execute custom smart contracts based on data published to the Steem blockchain. This allows us to do things that are not currently supported by the Steem
+                        blockchain, such as creating custom tokens, or literally anything else achievable with a smart contract.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading2">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
-								How does Steem Engine work?
+        <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading2">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
+								How does Hive Engine work?
 							</a>
-						</h4>
-					</div>
-					<div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
-						<div class="panel-body">
-							Steem Engine uses the Steem Smart Contracts software created by @harpagon. The software scans all blocks added to the Steem blockchain for transfers, 
-							custom_json, or even comment operations that contain a certain sidechain ID. It then executes the smart contract function specified in the operation
-							data and packages it into a block which is added to the sidechain. It also maintains the current state of the sidechain and all smart contracts running
-							on it which can be queried using a familiar RPC API.
-						</div>
-					</div>
-				</div>
-			</div>
+                    </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
+                    <div class="panel-body">
+                        Hive Engine uses the Steem Smart Contracts software created by @harpagon. The software scans all blocks added to the Steem blockchain for transfers, custom_json, or even comment operations that contain a certain sidechain ID. It then executes the smart
+                        contract function specified in the operation data and packages it into a block which is added to the sidechain. It also maintains the current state of the sidechain and all smart contracts running on it which can be queried using
+                        a familiar RPC API.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading3">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion3" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
-								What are ENG tokens?
+        <div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading3">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion3" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
+								What are BEE tokens?
 							</a>
-						</h4>
-					</div>
-					<div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
-						<div class="panel-body">
-							ENG is the native token of the Steem Engine platform, just like how ETH is the native token of the Ethereum platform. ENG is currently required to create 
-							a new token on the Steem Engine platform, and in the future it will be required to publish and execute custom smart contracts.
-						</div>
-					</div>
-				</div>
-			</div>
+                    </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
+                    <div class="panel-body">
+                        BEE is the native token of the Hive Engine platform, just like how ETH is the native token of the Ethereum platform. BEE is currently required to create a new token on the Hive Engine platform, and in the future it will be required to publish and execute
+                        custom smart contracts.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="panel-group" id="accordion4" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading4">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion4" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
-								How do I get ENG tokens?
+        <div class="panel-group" id="accordion4" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading4">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion4" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
+								How do I get BEE tokens?
 							</a>
-						</h4>
-					</div>
-					<div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading4">
-						<div class="panel-body">
-							1M ENG tokens have been set aside for initial sale at the cost of 1 STEEM per ENG token. They can be purchased through this website by clicking the "Buy ENG" button
-							on the Tokens page. In the future, ENG will be able to be earned by running the Steem Smart Contracts node software to create blocks and help secure the network, 
-							just as STEEM/BTC/ETH can be earned by block producers securing their networks. At that point ENG will no longer be offered for sale directly and the price will be
-							determined by the internal STEEM/ENG market.
-						</div>
-					</div>
-				</div>
-			</div>
+                    </h4>
+                </div>
+                <div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading4">
+                    <div class="panel-body">
+                        1M BEE tokens have been set aside for initial sale at the cost of 1 HIVE per BEE token. They can be purchased through this website by clicking the "Buy BEE" button on the Tokens page. In the future, BEE will be able to be earned by running the Steem Smart
+                        Contracts node software to create blocks and help secure the network, just as HIVE/BTC/ETH can be earned by block producers securing their networks. At that point BEE will no longer be offered for sale directly and the price will
+                        be determined by the internal HIVE/BEE market.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="panel-group" id="accordion5" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading5">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion5" href="#collapse5" aria-expanded="false" aria-controls="collapse5">
+        <div class="panel-group" id="accordion5" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading5">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion5" href="#collapse5" aria-expanded="false" aria-controls="collapse5">
 								How do I create my own token?
 							</a>
-						</h4>
-					</div>
-					<div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading5">
-						<div class="panel-body">
-							You can create your own token through this website by clicking the "CREATE" button at the top of the Tokens page. You will then be prompted to fill in 
-							all of the required information about your token and pay the specified fee in ENG. Please keep in mind that, other than the token URL, none of the information 
-							can be changed once your token has been created, so please make sure you have thoroughly thought through everything before submitting.
-						</div>
-					</div>
-				</div>
-			</div>
+                    </h4>
+                </div>
+                <div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading5">
+                    <div class="panel-body">
+                        You can create your own token through this website by clicking the "CREATE" button at the top of the Tokens page. You will then be prompted to fill in all of the required information about your token and pay the specified fee in BEE. Please keep in mind
+                        that, other than the token URL, none of the information can be changed once your token has been created, so please make sure you have thoroughly thought through everything before submitting.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="panel-group" id="accordion6" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading6">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion6" href="#collapse6" aria-expanded="false" aria-controls="collapse6">
+        <div class="panel-group" id="accordion6" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading6">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion6" href="#collapse6" aria-expanded="false" aria-controls="collapse6">
 								Why is there a fee to create a token?
 							</a>
-						</h4>
-					</div>
-					<div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
-						<div class="panel-body">
-							The fee is primarily to prevent people from creating "spam" tokens that have no real planned use. If you would like to test creating a token, you can 
-							do so for free on the <a href="https://qa.steem-engine.com" target="_blank">testnet website here.</a> The fee is meant to be large enough to prevent 
-							people from creating tokens they don't plan to actually use, but small enough to not be a barrier for any serious projects. If you have a good project
-							and you truly cannot afford the fee, please <a href="https://discord.gg/xWRYB9s" target="_blank">contact us on Discord</a> and we may be able to cover 
-							the fee for you.
-						</div>
-					</div>
-				</div>
-			</div>
+                    </h4>
+                </div>
+                <div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
+                    <div class="panel-body">
+                        The fee is primarily to prevent people from creating "spam" tokens that have no real planned use. If you would like to test creating a token, you can do so for free on the <a href="https://qa.steem-engine.com" target="_blank">testnet website here.</a>                        The fee is meant to be large enough to prevent people from creating tokens they don't plan to actually use, but small enough to not be a barrier for any serious projects. If you have a good project and you truly cannot afford the
+                        fee, please <a href="https://discord.gg/xWRYB9s" target="_blank">contact us on Discord</a> and we may be able to cover the fee for you.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="panel-group" id="accordion7" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading7">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion7" href="#collapse7" aria-expanded="false" aria-controls="collapse7">
+        <div class="panel-group" id="accordion7" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading7">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion7" href="#collapse7" aria-expanded="false" aria-controls="collapse7">
 								How do I issue new tokens and what does that mean?
 							</a>
-						</h4>
-					</div>
-					<div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
-						<div class="panel-body">
-							After a new token is created they must be "issued" in order for them to be used and traded. The total amount of a token that can be issued is limited by the 
-							max supply set during token creation. Tokens may be issued all at once or in small amounts over time, it is up to the token creator. To issue a token, you can 
-							click on the token in the list on the Tokens page and then click on the "Issue" button on the top right of the screen. Only the creator of the token may issue 
-							them, so you must be logged in with the Steem account that created the token in order for the option to appear.
-						</div>
-					</div>
-				</div>
-			</div>
+                    </h4>
+                </div>
+                <div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
+                    <div class="panel-body">
+                        After a new token is created they must be "issued" in order for them to be used and traded. The total amount of a token that can be issued is limited by the max supply set during token creation. Tokens may be issued all at once or in small amounts over
+                        time, it is up to the token creator. To issue a token, you can click on the token in the list on the Tokens page and then click on the "Issue" button on the top right of the screen. Only the creator of the token may issue them,
+                        so you must be logged in with the Steem account that created the token in order for the option to appear.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="panel-group" id="accordion8" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading8">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion8" href="#collapse8" aria-expanded="false" aria-controls="collapse8">
+        <div class="panel-group" id="accordion8" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading8">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion8" href="#collapse8" aria-expanded="false" aria-controls="collapse8">
 								How do I view my balance/history and transfer tokens?
 							</a>
-						</h4>
-					</div>
-					<div id="collapse8" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading8">
-						<div class="panel-body">
-							You can view your balances of any tokens built on the Steem Engine platform from the "Wallet" page of this site. If you click on a particular token 
-							you can see your recent transaction history. If you click on a particular transaction in the history list you can see more details of that transaction.
-							There is also a "Send" button at the top right of the page after you have clicked on a specific token which will allow you to transfer them to another 
-							Steem account. Additionally, you can view your token balances and transfer tokens directly from the
-							<a href="https://chrome.google.com/webstore/detail/steem-keychain/lkcjlnjfpbikmcmbachjpdbijejflpcm" target="_blank">Steem Keychain browser extension</a>.
-						</div>
-					</div>
-				</div>
-			</div>
+                    </h4>
+                </div>
+                <div id="collapse8" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading8">
+                    <div class="panel-body">
+                        You can view your balances of any tokens built on the Hive Engine platform from the "Wallet" page of this site. If you click on a particular token you can see your recent transaction history. If you click on a particular transaction in the history list
+                        you can see more details of that transaction. There is also a "Send" button at the top right of the page after you have clicked on a specific token which will allow you to transfer them to another Steem account. Additionally, you
+                        can view your token balances and transfer tokens directly from the
+                        <a href="https://chrome.google.com/webstore/detail/steem-keychain/lkcjlnjfpbikmcmbachjpdbijejflpcm" target="_blank">Steem Keychain browser extension</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="faq-section-title">MARKET</div>
+        <div class="faq-section-title">MARKET</div>
 
-			<div class="panel-group" id="market1" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading_mkt1">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#market1" href="#collapse_mkt1" aria-expanded="false" aria-controls="collapse_mkt1">
+        <div class="panel-group" id="market1" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading_mkt1">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#market1" href="#collapse_mkt1" aria-expanded="false" aria-controls="collapse_mkt1">
 								What is the market?
 							</a>
-						</h4>
-					</div>
-					<div id="collapse_mkt1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_mkt1">
-						<div class="panel-body">
-							The Steem Engine market is a decentralized exchange (DEX) that allows anyone to buy or sell any token created on the Steem Engine platform against STEEM.
-							All transactions are published on the Steem blockchain and trades are executed by the open source Steem Smart Contracts platform software which is avaialble
-							for anyone to independently run and verify. The Steem Engine market is very similar to other decentralized exchanges such as BitShares, Stellar, and even the 
-							internal STEEM / SBD market on the Steem blockchain.
-						</div>
-					</div>
-				</div>
-			</div>
+                    </h4>
+                </div>
+                <div id="collapse_mkt1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_mkt1">
+                    <div class="panel-body">
+                        The Hive Engine market is a decentralized exchange (DEX) that allows anyone to buy or sell any token created on the Hive Engine platform against HIVE. All transactions are published on the Steem blockchain and trades are executed by the open source Steem
+                        Smart Contracts platform software which is avaialble for anyone to independently run and verify. The Hive Engine market is very similar to other decentralized exchanges such as BitShares, Stellar, and even the internal HIVE / SBD
+                        market on the Steem blockchain.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="panel-group" id="market2" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading_mkt2">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#market2" href="#collapse_mkt2" aria-expanded="false" aria-controls="collapse_mkt2">
+        <div class="panel-group" id="market2" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading_mkt2">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#market2" href="#collapse_mkt2" aria-expanded="false" aria-controls="collapse_mkt2">
 								What is STEEMP?
 							</a>
-						</h4>
-					</div>
-					<div id="collapse_mkt2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_mkt2">
-						<div class="panel-body">
-							Since the Steem Engine platform is not part of the core Steem blockchain code, it cannot transact in the STEEM token directly. Instead we have created a 
-							Steem Engine token which is pegged to the value of the STEEM token, called STEEMP. This means that all trading on the Steem Engine market will use the STEEMP 
-							token which can be exchanged for real STEEM or vice versa at any time on a 1:1 basis.
-							<br/><br/>
-							STEEMP is pegged to the value of STEEM because one STEEM token will be held
-							for every STEEMP token in circulation, and users are able to exchange STEEM for STEEMP and vice versa on a 1:1 basis at any time. This is the same way that
-							many other pegged tokens work, such as Tether where, allegedly, $1 is held for every USDT token in circulation. Unlike with Tether, anyone can easily verify 
-							that the amount of STEEM held in the @steem-peg account is enough to cover all of the STEEMP tokens in circulation at any time thanks to the open and 
-							transparent nature of the Steem blockchain. Another example of creating a STEEM-pegged token to allow STEEM to be traded on another exchange is the 
-							<a href="https://steemanchor.com/" target="_blank">Steem Anchor</a> project which allows STEEM and SBD to be traded on the Stellar decentralized exchange.
-						</div>
-					</div>
-				</div>
-			</div>
+                    </h4>
+                </div>
+                <div id="collapse_mkt2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_mkt2">
+                    <div class="panel-body">
+                        Since the Hive Engine platform is not part of the core Steem blockchain code, it cannot transact in the HIVE token directly. Instead we have created a Hive Engine token which is pegged to the value of the HIVE token, called STEEMP. This means that all
+                        trading on the Hive Engine market will use the STEEMP token which can be exchanged for real HIVE or vice versa at any time on a 1:1 basis.
+                        <br/><br/> STEEMP is pegged to the value of HIVE because one HIVE token will be held for every STEEMP token in circulation, and users are able to exchange HIVE for STEEMP and vice versa on a 1:1 basis at any time. This is the same
+                        way that many other pegged tokens work, such as Tether where, allegedly, $1 is held for every USDT token in circulation. Unlike with Tether, anyone can easily verify that the amount of HIVE held in the @steem-peg account is enough
+                        to cover all of the STEEMP tokens in circulation at any time thanks to the open and transparent nature of the Steem blockchain. Another example of creating a HIVE-pegged token to allow HIVE to be traded on another exchange is the
+                        <a href="https://steemanchor.com/" target="_blank">Steem Anchor</a> project which allows HIVE and SBD to be traded on the Stellar decentralized exchange.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="panel-group" id="market3" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading_mkt3">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#market3" href="#collapse_mkt3" aria-expanded="false" aria-controls="collapse_mkt3">
-								How do I deposit or withdraw STEEM?
+        <div class="panel-group" id="market3" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading_mkt3">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#market3" href="#collapse_mkt3" aria-expanded="false" aria-controls="collapse_mkt3">
+								How do I deposit or withdraw HIVE?
 							</a>
-						</h4>
-					</div>
-					<div id="collapse_mkt3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_mkt3">
-						<div class="panel-body">
-							At the top of the Market page on the Steem Engine website there are buttons to both deposit and withdraw STEEM. Please do NOT transfer tokens manually, to ensure your deposits and withdrawals arrive in the right location.
-							<br/><br/>
-							Please note that there is a 1% fee on all STEEM deposits and withdrawals. This fee is charged for the service of creating and maintaining the STEEM-pegged 
-							token on the Steem Engine platform and will be used to fund future development of the platform and associated services.
-						</div>
-					</div>
-				</div>
-			</div>
+                    </h4>
+                </div>
+                <div id="collapse_mkt3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_mkt3">
+                    <div class="panel-body">
+                        At the top of the Market page on the Hive Engine website there are buttons to both deposit and withdraw HIVE. Please do NOT transfer tokens manually, to ensure your deposits and withdrawals arrive in the right location.
+                        <br/><br/> Please note that there is a 1% fee on all HIVE deposits and withdrawals. This fee is charged for the service of creating and maintaining the HIVE-pegged token on the Hive Engine platform and will be used to fund future
+                        development of the platform and associated services.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="panel-group" id="market4" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading_mkt4">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#market4" href="#collapse_mkt4" aria-expanded="false" aria-controls="collapse_mkt4">
+        <div class="panel-group" id="market4" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading_mkt4">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#market4" href="#collapse_mkt4" aria-expanded="false" aria-controls="collapse_mkt4">
 								How do I buy or sell tokens?
 							</a>
-						</h4>
-					</div>
-					<div id="collapse_mkt4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_mkt4">
-						<div class="panel-body">
-							To buy or sell Steem Engine tokens on the market, you can first find the token you wish to trade in the tokens or wallet page and click on the trade icon
-							next to it (<i class="fas fa-exchange-alt"></i>). This will take you to the market view for that specific token. If you would like to buy the token you will
-							first need enough STEEMP tokens in your account to pay for them at the specified price. You can get STEEMP tokens by either selling other Steem Engine tokens 
-							for STEEMP on the market, or you can deposit STEEM and get an equal amount of STEEMP tokens in return using the "Deposit STEEM" button at the top of the market page.
-							<br/><br/>
-							When you are ready to place your trade, you can enter the price at which you would like to buy or sell the tokens and the amount you would like to buy or sell
-							and then press the "Buy" or "Sell" button. You will then see a confirmation screen in which you can double check the details of your order and submit it. Once 
-							submitted, your order will appear in the "My Open Orders" section until it is either filled or cancelled. 
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<div class="panel-group" id="market5" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading_mkt5">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#market5" href="#collapse_mkt5" aria-expanded="false" aria-controls="collapse_mkt5">
+                    </h4>
+                </div>
+                <div id="collapse_mkt4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_mkt4">
+                    <div class="panel-body">
+                        To buy or sell Hive Engine tokens on the market, you can first find the token you wish to trade in the tokens or wallet page and click on the trade icon next to it (<i class="fas fa-exchange-alt"></i>). This will take you to the
+                        market view for that specific token. If you would like to buy the token you will first need enough STEEMP tokens in your account to pay for them at the specified price. You can get STEEMP tokens by either selling other Hive Engine
+                        tokens for STEEMP on the market, or you can deposit HIVE and get an equal amount of STEEMP tokens in return using the "Deposit HIVE" button at the top of the market page.
+                        <br/><br/> When you are ready to place your trade, you can enter the price at which you would like to buy or sell the tokens and the amount you would like to buy or sell and then press the "Buy" or "Sell" button. You will then
+                        see a confirmation screen in which you can double check the details of your order and submit it. Once submitted, your order will appear in the "My Open Orders" section until it is either filled or cancelled.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-group" id="market5" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading_mkt5">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#market5" href="#collapse_mkt5" aria-expanded="false" aria-controls="collapse_mkt5">
 								Are there any trading fees?
 							</a>
-						</h4>
-					</div>
-					<div id="collapse_mkt5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_mkt5">
-						<div class="panel-body">
-							There are no fees for using the Steem Engine market, however please note that as with anything on the Steem blockchain you will need to have enough 
-							Resource Credits available in your account to publish the required transactions. Also, as mentioned above, there is a 1% fee for any deposits or withdrawals 
-							of STEEM.
-						</div>
-					</div>
-				</div>
-			</div>
+                    </h4>
+                </div>
+                <div id="collapse_mkt5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_mkt5">
+                    <div class="panel-body">
+                        There are no fees for using the Hive Engine market, however please note that as with anything on the Steem blockchain you will need to have enough Resource Credits available in your account to publish the required transactions. Also, as mentioned above,
+                        there is a 1% fee for any deposits or withdrawals of HIVE.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="panel-group" id="market6" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading_mkt6">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#market6" href="#collapse_mkt6" aria-expanded="false" aria-controls="collapse_mkt6">
+        <div class="panel-group" id="market6" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading_mkt6">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#market6" href="#collapse_mkt6" aria-expanded="false" aria-controls="collapse_mkt6">
 								Why aren't some tokens listed on the market?
 							</a>
-						</h4>
-					</div>
-					<div id="collapse_mkt6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_mkt6">
-						<div class="panel-body">
-							While the market is fully decentralized and anyone can trade any token on the Steem Engine platform against STEEM at any time, the Steem Engine website itself 
-							is still owned and operated by a centralized entity and must abide by local laws and regulations in the jurisdictions where it is based. As a result certain 
-							tokens may not be listed on the market page of the Steem Engine website, though they may still be able to be traded on other Steem Engine based front ends.
-							Additionally, token creators may request that their token not be listed on the Steem Engine website market page and we plan to honor those requests.
-						</div>
-					</div>
-				</div>
-			</div>
+                    </h4>
+                </div>
+                <div id="collapse_mkt6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_mkt6">
+                    <div class="panel-body">
+                        While the market is fully decentralized and anyone can trade any token on the Hive Engine platform against HIVE at any time, the Hive Engine website itself is still owned and operated by a centralized entity and must abide by local laws and regulations
+                        in the jurisdictions where it is based. As a result certain tokens may not be listed on the market page of the Hive Engine website, though they may still be able to be traded on other Hive Engine based front ends. Additionally,
+                        token creators may request that their token not be listed on the Hive Engine website market page and we plan to honor those requests.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="faq-section-title">PEGGED TOKENS</div>
+        <div class="faq-section-title">PEGGED TOKENS</div>
 
-			<div class="panel-group" id="accordion12" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading12">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion12" href="#collapse12" aria-expanded="false" aria-controls="collapse12">
+        <div class="panel-group" id="accordion12" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading12">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion12" href="#collapse12" aria-expanded="false" aria-controls="collapse12">
 								What are pegged tokens?
 							</a>
-						</h4>
-					</div>
-					<div id="collapse12" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading12">
-						<div class="panel-body">
-							Pegged tokens are tokens on Steem Engine that are backed one-to-one by a token on another blockchain or potentially by a real world asset such as USD or gold.
-							In addition to STEEM, Steem Engine now supports pegged tokens for Bitcoin (BTC), Litecoin (LTC), Bitcoin Cash (BCH), and Dogecoin (DOGE) and plans to add 
-							many more in the near future. This means that at any time users can deposit any of the supported tokens and receive the pegged versions which can then be
-							transferred or traded for other Steem Engine tokens on the Steem Engine decentralized market. Users can also withdraw the pegged tokens back out to the real
-							version at any time.
-						</div>
-					</div>
-				</div>
-			</div>
+                    </h4>
+                </div>
+                <div id="collapse12" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading12">
+                    <div class="panel-body">
+                        Pegged tokens are tokens on Hive Engine that are backed one-to-one by a token on another blockchain or potentially by a real world asset such as USD or gold. In addition to HIVE, Hive Engine now supports pegged tokens for Bitcoin (BTC), Litecoin (LTC),
+                        Bitcoin Cash (BCH), and Dogecoin (DOGE) and plans to add many more in the near future. This means that at any time users can deposit any of the supported tokens and receive the pegged versions which can then be transferred or traded
+                        for other Hive Engine tokens on the Hive Engine decentralized market. Users can also withdraw the pegged tokens back out to the real version at any time.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="panel-group" id="accordion13" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading13">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion13" href="#collapse13" aria-expanded="false" aria-controls="collapse13">
-								How do I deposit tokens into Steem Engine?
+        <div class="panel-group" id="accordion13" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading13">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion13" href="#collapse13" aria-expanded="false" aria-controls="collapse13">
+								How do I deposit tokens into Hive Engine?
 							</a>
-						</h4>
-					</div>
-					<div id="collapse13" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading13">
-						<div class="panel-body">
-							To deposit tokens into Steem Engine from an external blockchain, you can click on the "Deposit" button found at the top of the wallet or market screens.
-							Then choose the token you would like to deposit from the list of supported tokens and click "Get Deposit Info". Then you will see the wallet address to
-							which you will need to send the tokens to deposit them. You may then send any amount of tokens to the wallet address shown on the appropriate blockchain
-							to convert them into Steem Engine pegged tokens. It may take some time for the transaction to complete and for the pegged tokens to be credited to your
-							Steem account depending on the speed of the external blockchain. You can check to see if your deposit has completed on the 
-							<a href="/?p=conversion_history">Conversion History page</a>.
-						</div>
-					</div>
-				</div>
-			</div>
+                    </h4>
+                </div>
+                <div id="collapse13" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading13">
+                    <div class="panel-body">
+                        To deposit tokens into Hive Engine from an external blockchain, you can click on the "Deposit" button found at the top of the wallet or market screens. Then choose the token you would like to deposit from the list of supported tokens and click "Get Deposit
+                        Info". Then you will see the wallet address to which you will need to send the tokens to deposit them. You may then send any amount of tokens to the wallet address shown on the appropriate blockchain to convert them into Steem
+                        Engine pegged tokens. It may take some time for the transaction to complete and for the pegged tokens to be credited to your Steem account depending on the speed of the external blockchain. You can check to see if your deposit
+                        has completed on the
+                        <a href="/?p=conversion_history">Conversion History page</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="panel-group" id="accordion14" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading14">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion14" href="#collapse14" aria-expanded="false" aria-controls="collapse14">
-								How do I withdraw pegged tokens from Steem Engine?
+        <div class="panel-group" id="accordion14" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading14">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion14" href="#collapse14" aria-expanded="false" aria-controls="collapse14">
+								How do I withdraw pegged tokens from Hive Engine?
 							</a>
-						</h4>
-					</div>
-					<div id="collapse14" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading14">
-						<div class="panel-body">
-							To withdraw pegged tokens from Steem Engine to your wallet on an external blockchain, you can click on the "Withdraw" button found at the top of the 
-							wallet or market screens. Then choose the token you would like to withdraw from the list of supported tokens, enter the amount you would like to withdraw,
-							and the wallet address on the external blockchain to which the tokens should be sent. It may take some time for the transaction to complete and for the 
-							tokens to be send to your external wallet depending on the speed of the external blockchain. Please double check the withdraw address as we cannot refund 
-							or recover any incorrect withdrawals. You can check to see if your withdrawal has completed on the 
-							<a href="/?p=conversion_history">Conversion History page</a>.
-						</div>
-					</div>
-				</div>
-			</div>
+                    </h4>
+                </div>
+                <div id="collapse14" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading14">
+                    <div class="panel-body">
+                        To withdraw pegged tokens from Hive Engine to your wallet on an external blockchain, you can click on the "Withdraw" button found at the top of the wallet or market screens. Then choose the token you would like to withdraw from the list of supported tokens,
+                        enter the amount you would like to withdraw, and the wallet address on the external blockchain to which the tokens should be sent. It may take some time for the transaction to complete and for the tokens to be send to your external
+                        wallet depending on the speed of the external blockchain. Please double check the withdraw address as we cannot refund or recover any incorrect withdrawals. You can check to see if your withdrawal has completed on the
+                        <a href="/?p=conversion_history">Conversion History page</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="panel-group" id="accordion15" role="tablist" aria-multiselectable="true">
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="heading15">
-							<h4 class="panel-title">
-								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion15" href="#collapse15" aria-expanded="false" aria-controls="collapse15">
+        <div class="panel-group" id="accordion15" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading15">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion15" href="#collapse15" aria-expanded="false" aria-controls="collapse15">
 									What do I do if there is an issue?
 								</a>
-							</h4>
-						</div>
-						<div id="collapse15" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading15">
-							<div class="panel-body">
-								If you run into any issue with deposits or withdrawals of pegged tokens on the Steem Engine platform, please post your problem in the #tech-support channel
-								in the <a href="https://discord.gg/xWRYB9s" target="_blank">Steem Engine Discord Server</a> and one of our dedicated support representatives will get back to
-								you as soon as possible.
-							</div>
-						</div>
-					</div>
-				</div>
+                    </h4>
+                </div>
+                <div id="collapse15" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading15">
+                    <div class="panel-body">
+                        If you run into any issue with deposits or withdrawals of pegged tokens on the Hive Engine platform, please post your problem in the #tech-support channel in the <a href="https://discord.gg/xWRYB9s" target="_blank">Hive Engine Discord Server</a>                        and one of our dedicated support representatives will get back to you as soon as possible.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="faq-section-title">DEVELOPERS</div>
+        <div class="faq-section-title">DEVELOPERS</div>
 
-			<div class="panel-group" id="accordion9" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading9">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion9" href="#collapse9" aria-expanded="false" aria-controls="collapse9">
-								Can I integrate my website or project with Steem Engine?
+        <div class="panel-group" id="accordion9" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading9">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion9" href="#collapse9" aria-expanded="false" aria-controls="collapse9">
+								Can I integrate my website or project with Hive Engine?
 							</a>
-						</h4>
-					</div>
-					<div id="collapse9" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading9">
-						<div class="panel-body">
-							Yes! The simplest way to integrate with the Steem Engine platform is to use our <a href="https://github.com/harpagon210/sscjs" target="_blank">JavaScript library</a>,
-							however you can also interact with the RPC endpoints directly from any programming language or tool of your choice. If you have any questions or need any help please 
-							reach out in the developers channel in <a href="https://discord.gg/xWRYB9s" target="_blank">our Discord server</a>.
-						</div>
-					</div>
-				</div>
-			</div>
+                    </h4>
+                </div>
+                <div id="collapse9" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading9">
+                    <div class="panel-body">
+                        Yes! The simplest way to integrate with the Hive Engine platform is to use our <a href="https://github.com/harpagon210/sscjs" target="_blank">JavaScript library</a>, however you can also interact with the RPC endpoints directly
+                        from any programming language or tool of your choice. If you have any questions or need any help please reach out in the developers channel in <a href="https://discord.gg/xWRYB9s" target="_blank">our Discord server</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="panel-group" id="accordion10" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading10">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion10" href="#collapse10" aria-expanded="false" aria-controls="collapse10">
+        <div class="panel-group" id="accordion10" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading10">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion10" href="#collapse10" aria-expanded="false" aria-controls="collapse10">
 								Can I run my own Steem Smart Contracts node?
 							</a>
-						</h4>
-					</div>
-					<div id="collapse10" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading10">
-						<div class="panel-body">
-							Yes again! You can download the <a href="https://github.com/harpagon210/steemsmartcontracts" target="_blank">Steem Smart Contracts software from GitHub</a> 
-							and view the documentation for how to set it up in the readme. If you have any questions or need any help please 
-							reach out in the developers channel in <a href="https://discord.gg/xWRYB9s" target="_blank">our Discord server</a>.
-						</div>
-					</div>
-				</div>
-			</div>
+                    </h4>
+                </div>
+                <div id="collapse10" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading10">
+                    <div class="panel-body">
+                        Yes again! You can download the <a href="https://github.com/harpagon210/steemsmartcontracts" target="_blank">Steem Smart Contracts software from GitHub</a> and view the documentation for how to set it up in the readme. If you have
+                        any questions or need any help please reach out in the developers channel in <a href="https://discord.gg/xWRYB9s" target="_blank">our Discord server</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="panel-group mb-4" id="accordion11" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading11">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion11" href="#collapse11" aria-expanded="false" aria-controls="collapse11">
-								Can I publish my own smart contract to the Steem Engine sidechain?
+        <div class="panel-group mb-4" id="accordion11" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading11">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion11" href="#collapse11" aria-expanded="false" aria-controls="collapse11">
+								Can I publish my own smart contract to the Hive Engine sidechain?
 							</a>
-						</h4>
-					</div>
-					<div id="collapse11" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading11">
-						<div class="panel-body">
-							We are currently not allowing arbitrary smart contracts to be published to the sidechain, as you can do on platforms like Ethereum or EOS. Our goal is to 
-							be able to allow this at some point in the future, but for now if you are interested in deploying a custom smart contract please 
-							<a href="https://discord.gg/xWRYB9s" target="_blank">contact us on Discord</a> and we can work with you on that.
-						</div>
-					</div>
-				</div>
-			</div>
+                    </h4>
+                </div>
+                <div id="collapse11" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading11">
+                    <div class="panel-body">
+                        We are currently not allowing arbitrary smart contracts to be published to the sidechain, as you can do on platforms like Ethereum or EOS. Our goal is to be able to allow this at some point in the future, but for now if you are interested in deploying
+                        a custom smart contract please
+                        <a href="https://discord.gg/xWRYB9s" target="_blank">contact us on Discord</a> and we can work with you on that.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		</div>
+    </div>
 </div>

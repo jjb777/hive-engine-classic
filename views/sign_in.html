@@ -1,79 +1,77 @@
 <header>
-  <h1>SIGN IN</h1>
-  <p>Welcome back. Let’s make stuff happen.</p>
+    <h1>SIGN IN</h1>
+    <p>Welcome back. Let’s make stuff happen.</p>
 </header>
 
 <div class="sign_in">
-  <div class="container">
-    <div class="row">
-      <div class="col d-flex flex-column justify-content-center divider">
-        
-        <img class="keychain-logo" src="https://s3.amazonaws.com/steem-engine/images/img_keychain-logo.svg">
+    <div class="container">
+        <div class="row">
+            <div class="col d-flex flex-column justify-content-center divider">
 
-        <p class="keychain_desc">
-          KEYCHAIN is the easiest and safest way to access your Steem credentials. Find it on the <a href="https://chrome.google.com/webstore/detail/steem-keychain/lkcjlnjfpbikmcmbachjpdbijejflpcm?hl=en" target="_blank">Chrome Web Store</a>.
-        </p>
+                <img class="keychain-logo" src="https://s3.amazonaws.com/steem-engine/images/img_keychain-logo.svg">
 
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text at">@</span>
-          </div>
-          <input type="text" id="txtUsernameKeyChain" placeholder="Steem Username">
-          <div class="input-group-append">            
-              <img src="https://s3.amazonaws.com/steem-engine/images/icon_sign-in.svg" onclick="KeychainSignIn();" class="cursor: pointer;" />            
-          </div>
+                <p class="keychain_desc">
+                    KEYCHAIN is the easiest and safest way to access your Steem credentials. Find it on the <a href="https://chrome.google.com/webstore/detail/steem-keychain/lkcjlnjfpbikmcmbachjpdbijejflpcm?hl=en" target="_blank">Chrome Web Store</a>.
+                </p>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text at">@</span>
+                    </div>
+                    <input type="text" id="txtUsernameKeyChain" placeholder="Steem Username">
+                    <div class="input-group-append">
+                        <img src="https://s3.amazonaws.com/steem-engine/images/icon_sign-in.svg" onclick="KeychainSignIn();" class="cursor: pointer;" />
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col d-flex flex-column justify-content-center align-items-center">
+                <p class="keychain_desc" style="margin-bottom: 20px;">
+                    You may also log in by entering your Steem account name and private posting key or master password.
+                </p>
+
+                <div class="input-group" style="margin-bottom: 20px;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text at">@</span>
+                    </div>
+                    <input type="text" id="txtUsername" placeholder="Steem Username">
+                </div>
+
+                <div class="input-group" style="margin-bottom: 40px;">
+                    <input type="password" id="txtMemoKey" placeholder="Private Posting Key">
+                </div>
+                <button class="btn btn-steemconnect" onclick="KeySignIn();">LOG IN</button>
+            </div>
         </div>
-        
-      </div>
-
-      <div class="col d-flex flex-column justify-content-center align-items-center">
-				<p class="keychain_desc" style="margin-bottom: 20px;">
-					You may also log in by entering your Steem account name and private posting key or master password.
-				</p>
-
-				<div class="input-group" style="margin-bottom: 20px;">
-					<div class="input-group-prepend">
-						<span class="input-group-text at">@</span>
-					</div>
-					<input type="text" id="txtUsername" placeholder="Steem Username">
-				</div>
-
-				<div class="input-group" style="margin-bottom: 40px;">
-					<input type="password" id="txtMemoKey" placeholder="Private Posting Key">
-				</div>
-        <button class="btn btn-steemconnect" onclick="KeySignIn();">LOG IN</button>
-      </div>
-    </div>      
-  </div>  
+    </div>
 </div>
 
 <div class="sign_in-2 container">
-  Don’t have a STEEM account? Let’s fix that. Go <a href="https://signup.steemit.com/" target="_blank">HERE</a> to sign up!
+    Don’t have a Hive account? Let’s fix that. Go <a href="https://signup.steemit.com/" target="_blank">HERE</a> to sign up!
 </div>
 
 <script>
+    function KeychainSignIn() {
+        SE.LogIn($("#txtUsernameKeyChain").val());
+    }
 
-function KeychainSignIn() {
-	SE.LogIn($("#txtUsernameKeyChain").val());
-}
+    function KeySignIn() {
+        SE.LogIn($("#txtUsername").val(), $("#txtMemoKey").val());
+    }
 
-function KeySignIn() {
-	SE.LogIn($("#txtUsername").val(), $("#txtMemoKey").val());
-}
+    $('#txtUsernameKeyChain').keypress(function(e) {
+        if (e.keyCode == 13)
+            KeychainSignIn();
+    });
 
-$('#txtUsernameKeyChain').keypress(function(e) {
-	if (e.keyCode == 13)
-		KeychainSignIn();
-});
+    $('#txtUsername').keypress(function(e) {
+        if (e.keyCode == 13)
+            KeySignIn();
+    });
 
-$('#txtUsername').keypress(function(e) {
-	if (e.keyCode == 13)
-		KeySignIn();
-});
-
-$('#txtMemoKey').keypress(function(e) {
-	if (e.keyCode == 13)
-		KeySignIn();
-});
-
+    $('#txtMemoKey').keypress(function(e) {
+        if (e.keyCode == 13)
+            KeySignIn();
+    });
 </script>

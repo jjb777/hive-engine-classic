@@ -1,56 +1,56 @@
-
 <div class="modal-dialog modal-dialog-centered modal-lg">
-  <div class="modal-content blue">
-    <div class="modal-header">
-      <h1 class="modal-title">BUY <%= Config.NATIVE_TOKEN %></h1>    
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <div class="modal-content blue">
+        <div class="modal-header">
+            <h1 class="modal-title">BUY
+                <%= Config.NATIVE_TOKEN %>
+            </h1>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">X</span>
-      </button>  
-    </div>
+      </button>
+        </div>
 
-    <div class="modal-body">
-      <label class="mb-0">Current STEEM Balance</label>
-      <p class="mb-4">
-        <%= addCommas(SE.User.account.balance) %>
-			</p>
-			
-			<label class="mb-0">Current <%= Config.NATIVE_TOKEN %> Balance</label>
-      <p class="mb-4">
-        <%= addCommas(SE.GetBalance(Config.NATIVE_TOKEN)) + ' ' + Config.NATIVE_TOKEN %>
-      </p>
-      
-      <label>PURCHASE AMOUNT</label>
-      <div class="input-group justify-content-center align-items-center">
-        <input type="text" placeholder="0.00000000" id="ssc_amount">
-        <div class="input-group-append">          
-          <%= Config.NATIVE_TOKEN %>
+        <div class="modal-body">
+            <label class="mb-0">Current HIVE Balance</label>
+            <p class="mb-4">
+                <%= addCommas(SE.User.account.balance) %>
+            </p>
+
+            <label class="mb-0">Current <%= Config.NATIVE_TOKEN %> Balance</label>
+            <p class="mb-4">
+                <%= addCommas(SE.GetBalance(Config.NATIVE_TOKEN)) + ' ' + Config.NATIVE_TOKEN %>
+            </p>
+
+            <label>PURCHASE AMOUNT</label>
+            <div class="input-group justify-content-center align-items-center">
+                <input type="text" placeholder="0.00000000" id="ssc_amount">
+                <div class="input-group-append">
+                    <%= Config.NATIVE_TOKEN %>
+                </div>
+                <div class="invalid-tooltip">
+                    Please enter an amount greater than 0
+                </div>
+            </div>
+            <div class="ssc-cost">1
+                <%= Config.NATIVE_TOKEN %> =
+                    <%= SE.Params.priceSteem * 1000 %> HIVE</div>
+
         </div>
-        <div class="invalid-tooltip">
-          Please enter an amount greater than 0
+
+        <div class="modal-footer">
+            <button id="btnBuy" type="button" class="btn btn-primary btn-lg w-100" onclick="onBuyClick()">BUY <%= Config.NATIVE_TOKEN %></button>
         </div>
-			</div>
-			<div class="ssc-cost">1 <%= Config.NATIVE_TOKEN %> = <%= SE.Params.priceSteem * 1000 %> STEEM</div>
-      
     </div>
-    
-    <div class="modal-footer">
-      <button id="btnBuy" type="button" class="btn btn-primary btn-lg w-100" onclick="onBuyClick()">BUY <%= Config.NATIVE_TOKEN %></button>
-    </div>
-  </div>
 </div>
 
 <script>
-function onBuyClick() {  
-  var amount = parseFloat($('#ssc_amount').val());
+    function onBuyClick() {
+        var amount = parseFloat($('#ssc_amount').val());
 
-  if(isNaN(amount) || amount == 0) {
-    $('#ssc_amount').addClass("is-invalid");    
-  }  
-  else {
-    SE.BuySSC(amount * <%= SE.Params.priceSteem * 1000 %>);
-  }
-  
-}
+        if (isNaN(amount) || amount == 0) {
+            $('#ssc_amount').addClass("is-invalid");
+        } else {
+            SE.BuySSC(amount * <%= SE.Params.priceSteem * 1000 %>);
+        }
 
+    }
 </script>
-
