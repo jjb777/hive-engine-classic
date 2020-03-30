@@ -43,9 +43,9 @@ SE = {
 			var url = '?p=' + view + (url_params ? '&' + $.param(url_params) : '');
 
 			if(window.location.search == url)
-				window.history.replaceState({ data: data, view: view, params: url_params }, 'Steem Engine - Smart Contracts on the STEEM blockchain', url);
+				window.history.replaceState({ data: data, view: view, params: url_params }, 'Hive Engine - Smart Contracts on the HIVE blockchain', url);
 			else
-				window.history.pushState({ data: data, view: view, params: url_params }, 'Steem Engine - Smart Contracts on the STEEM blockchain', url);
+				window.history.pushState({ data: data, view: view, params: url_params }, 'Hive Engine - Smart Contracts on the HIVE blockchain', url);
 		}
   },
 
@@ -185,7 +185,7 @@ SE = {
 		if (account) {
 			tasks.push(ssc.find('market', 'buyBook', { symbol: symbol, account: account }, 100, 0, [{ index: '_id', descending: true }], false));
 			tasks.push(ssc.find('market', 'sellBook', { symbol: symbol, account: account }, 100, 0, [{ index: '_id', descending: true }], false));
-			tasks.push(ssc.find('tokens', 'balances', { account: account, symbol : { '$in' : [symbol, 'STEEMP'] } }, 2, 0, '', false));
+			tasks.push(ssc.find('tokens', 'balances', { account: account, symbol : { '$in' : [symbol, 'SWAP.HIVE'] } }, 2, 0, '', false));
 		}
 		Promise.all(tasks).then(results => {
 			// prepare buy orders
@@ -232,7 +232,7 @@ SE = {
 				user_orders.sort((a, b) => b.timestamp - a.timestamp);
 
 				user_token_balance = _.find(results[5], (balance) => balance.symbol === symbol);
-				user_steemp_balance = _.find(results[5], (balance) => balance.symbol === 'STEEMP');
+				user_steemp_balance = _.find(results[5], (balance) => balance.symbol === 'SWAP.HIVE');
 			}
 
 			$('#market_view').html(render('market_view', {
@@ -290,7 +290,7 @@ SE = {
 		console.log('Broadcasting ' + type + ' order: ', JSON.stringify(transaction_data));
 
     if(useKeychain()) {
-      steem_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), type.toUpperCase() + ' Order: ' + symbol, function(response) {
+      hive_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), type.toUpperCase() + ' Order: ' + symbol, function(response) {
         if(response.success && response.result) {
 					SE.CheckTransaction(response.result.id, 3, tx => {
             if(tx.success)
@@ -339,7 +339,7 @@ SE = {
 		console.log('Broadcasting cancel order: ', JSON.stringify(transaction_data));
 
     	if (useKeychain()) {
-      		steem_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Cancel ' + type.toUpperCase() + ' Order', function(response) {
+      		hive_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Cancel ' + type.toUpperCase() + ' Order', function(response) {
         		if (response.success && response.result) {
 					SE.CheckTransaction(response.result.id, 3, tx => {
 						if (tx.success) {
@@ -363,8 +363,8 @@ SE = {
 		}
   	},
 
-	LoadTokens: function (callback) {		
-		ssc.find('tokens', 'tokens', {}, 1000, 0, [], (err, result) => {			
+	LoadTokens: function(callback) {
+		ssc.find('tokens', 'tokens', { }, 1000, 0, [], (err, result) => {
 			SE.Tokens = result.filter(t => !Config.DISABLED_TOKENS.includes(t.symbol));
 
 			ssc.find('market', 'metrics', { }, 1000, 0, '', false).then(async (metrics) => {
@@ -413,7 +413,7 @@ SE = {
 						}
 					}
 
-					if(token.symbol == 'STEEMP')
+					if(token.symbol == 'SWAP.HIVE')
 						token.lastPrice = 1;
 				}
 
@@ -421,10 +421,10 @@ SE = {
 					return (b.volume > 0 ? b.volume : b.marketCap / 1000000000000) - (a.volume > 0 ? a.volume : a.marketCap / 1000000000000);
 				});
 
-				var steemp_balance = await ssc.findOne('tokens', 'balances', { account: 'steem-peg', symbol: 'STEEMP' });
+				var steemp_balance = await ssc.findOne('tokens', 'balances', { account: 'honey-swap', symbol: 'SWAP.HIVE' });
 
 				if(steemp_balance && steemp_balance.balance) {
-					var token = SE.GetToken('STEEMP');
+					var token = SE.GetToken('SWAP.HIVE');
 					token.supply -= parseFloat(steemp_balance.balance);
 					token.circulatingSupply -= parseFloat(steemp_balance.balance);
 				}
@@ -503,7 +503,7 @@ SE = {
 		};
 
     if (useKeychain()) {
-      steem_keychain.requestCustomJson(username, 'scot_claim_token', 'Posting', JSON.stringify(claimData), `Claim ${calculated} ${symbol.toUpperCase()} Tokens`, function(response) {
+      hive_keychain.requestCustomJson(username, 'scot_claim_token', 'Posting', JSON.stringify(claimData), `Claim ${calculated} ${symbol.toUpperCase()} Tokens`, function(response) {
         if (response.success && response.result) {
 					SE.ShowToast(true, `${symbol.toUpperCase()} tokens claimed`);
 					SE.HideLoading();
@@ -541,7 +541,7 @@ SE = {
 		};
 
 		if (useKeychain()) {
-			steem_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Enable Token Staking', function(response) {
+			hive_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Enable Token Staking', function(response) {
 				if (response.success && response.result) {
 					SE.CheckTransaction(response.result.id, 3, tx => {
 						if (tx.success) {
@@ -587,7 +587,7 @@ SE = {
 		};
 
     	if (useKeychain()) {
-      		steem_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Stake Token', function(response) {
+      		hive_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Stake Token', function(response) {
         		if (response.success && response.result) {
 					SE.CheckTransaction(response.result.id, 3, tx => {
             			if (tx.success) {
@@ -631,7 +631,7 @@ SE = {
 		};
 
 		if (useKeychain()) {
-			steem_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Stake Token', function(response) {
+			hive_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Stake Token', function(response) {
 				if (response.success && response.result) {
 					SE.CheckTransaction(response.result.id, 3, tx => {
 						if (tx.success) {
@@ -674,7 +674,7 @@ SE = {
     	};
 
     	if (useKeychain()) {
-      		steem_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Stake Token', function(response) {
+      		hive_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Stake Token', function(response) {
         		if (response.success && response.result) {
 					SE.CheckTransaction(response.result.id, 3, tx => {
             			if (tx.success) {
@@ -720,7 +720,7 @@ SE = {
 		};
 
 		if (useKeychain()) {
-			steem_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Enable Token Delegation', function(response) {
+			hive_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Enable Token Delegation', function(response) {
 				if (response.success && response.result) {
 					SE.CheckTransaction(response.result.id, 3, tx => {
 						if (tx.success) {
@@ -766,7 +766,7 @@ SE = {
 		};
 
     	if (useKeychain()) {
-      		steem_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Delegate Token', function(response) {
+      		hive_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Delegate Token', function(response) {
         		if (response.success && response.result) {
 					SE.CheckTransaction(response.result.id, 3, tx => {
             			if (tx.success) {
@@ -811,7 +811,7 @@ SE = {
 		};
 
 		if (useKeychain()) {
-			steem_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Undelegate Tokens', function(response) {
+			hive_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Undelegate Tokens', function(response) {
 				if (response.success && response.result) {
 					SE.CheckTransaction(response.result.id, 3, tx => {
 						if (tx.success) {
@@ -1009,8 +1009,8 @@ SE = {
   LogIn: function(username, key) {
 		SE.ShowLoading();
 
-		if(window.steem_keychain && !key) {
-			steem_keychain.requestSignBuffer(username, 'Log In', 'Posting', function(response) {
+		if(window.hive_keychain && !key) {
+			hive_keychain.requestSignBuffer(username, 'Log In', 'Posting', function(response) {
 				if(response.error) {
           SE.HideLoading();
           SE.ShowToast(false, 'Unable to log in with the @' + username + ' account.');
@@ -1100,7 +1100,7 @@ SE = {
     };
 
     if(useKeychain()) {
-      steem_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Update Token Metadata', function(response) {
+      hive_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Update Token Metadata', function(response) {
         if(response.success && response.result) {
 					SE.CheckTransaction(response.result.id, 3, tx => {
             if(tx.success)
@@ -1143,7 +1143,7 @@ SE = {
 		};
 
 		if (useKeychain()) {
-			steem_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Update Token Prevision', function(response) {
+			hive_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Update Token Prevision', function(response) {
 				if(response.success && response.result) {
 					SE.CheckTransaction(response.result.id, 3, tx => {
 						if (tx.success) {
@@ -1190,7 +1190,7 @@ SE = {
 			registration_data.contractPayload.url = url;
 
     if(useKeychain()) {
-      steem_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(registration_data), 'Steem Engine Token Registration', function(response) {
+      hive_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(registration_data), 'Steem Engine Token Registration', function(response) {
         if(response.success && response.result) {
 					SE.CheckTransaction(response.result.id, 3, tx => {
             if(tx.success)
@@ -1237,7 +1237,7 @@ SE = {
     };
 
     if(useKeychain()) {
-      steem_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Token Issue: ' + symbol, function(response) {
+      hive_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Token Issue: ' + symbol, function(response) {
         if(response.success && response.result) {
 					SE.CheckTransaction(response.result.id, 3, tx => {
             if(tx.success)
@@ -1311,7 +1311,7 @@ SE = {
 		console.log('SENDING: ' + symbol);
 
     if(useKeychain()) {
-      steem_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Token Transfer: ' + symbol, function(response) {
+      hive_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Token Transfer: ' + symbol, function(response) {
         if(response.success && response.result) {
 					SE.CheckTransaction(response.result.id, 3, tx => {
             if(tx.success)
@@ -1356,7 +1356,7 @@ SE = {
     };
 
     if(useKeychain()) {
-      steem_keychain.requestTransfer(SE.User.name, 'steemsc', (amount).toFixedNoRounding(3), JSON.stringify(transaction_data), 'STEEM', function(response) {
+      hive_keychain.requestTransfer(SE.User.name, 'steemsc', (amount).toFixedNoRounding(3), JSON.stringify(transaction_data), 'HIVE', function(response) {
         if(response.success && response.result) {
 					SE.CheckTransaction(response.result.id, 3, tx => {
 						if(tx.success) {
@@ -1373,7 +1373,7 @@ SE = {
       });
     } else {
 			SE.HideLoading();
-			SE.SteemConnectTransfer(SE.User.name, 'steemsc', (amount).toFixedNoRounding(3) + ' STEEM', JSON.stringify(transaction_data), () => {
+			SE.SteemConnectTransfer(SE.User.name, 'steemsc', (amount).toFixedNoRounding(3) + ' HIVE', JSON.stringify(transaction_data), () => {
 				SE.LoadBalances(SE.User.name, () => SE.ShowHistory(Config.NATIVE_TOKEN, 'Steem Engine Tokens'));
 			});
 		}
@@ -1390,14 +1390,14 @@ SE = {
     var transaction_data = {
 			id: Config.CHAIN_ID,
 			json: {
-				"contractName": "steempegged",
+				"contractName": "hivepegged",
 				"contractAction": "buy",
 				"contractPayload": { }
 			}
     };
 
     if(useKeychain()) {
-      steem_keychain.requestTransfer(SE.User.name, Config.STEEMP_ACCOUNT, (amount).toFixedNoRounding(3), JSON.stringify(transaction_data), 'STEEM', function(response) {
+      hive_keychain.requestTransfer(SE.User.name, Config.STEEMP_ACCOUNT, (amount).toFixedNoRounding(3), JSON.stringify(transaction_data), 'HIVE', function(response) {
         if(response.success && response.result) {
 					SE.CheckTransaction(response.result.id, 3, tx => {
 						if(tx.success) {
@@ -1406,7 +1406,7 @@ SE = {
 							SE.HideDialog();
 							SE.LoadBalances(SE.User.name, () => SE.ShowMarket());
             } else
-              SE.ShowToast(false, 'An error occurred depositing STEEM: ' + tx.error);
+              SE.ShowToast(false, 'An error occurred depositing HIVE: ' + tx.error);
 					});
         }
         else
@@ -1414,7 +1414,7 @@ SE = {
       });
     } else {
 			SE.HideLoading();
-			SE.SteemConnectTransfer(SE.User.name, Config.STEEMP_ACCOUNT, (amount).toFixedNoRounding(3) + ' STEEM', JSON.stringify(transaction_data), () => {
+			SE.SteemConnectTransfer(SE.User.name, Config.STEEMP_ACCOUNT, (amount).toFixedNoRounding(3) + ' HIVE', JSON.stringify(transaction_data), () => {
 				SE.LoadBalances(SE.User.name, () => SE.ShowMarket());
 			});
 		}
@@ -1429,7 +1429,7 @@ SE = {
     }
 
     var transaction_data = {
-			"contractName": "steempegged",
+			"contractName": "hivepegged",
 			"contractAction": "withdraw",
 			"contractPayload": { 
 				"quantity": (amount).toFixedNoRounding(3)
@@ -1438,11 +1438,11 @@ SE = {
 		};
 
     if(useKeychain()) {
-      steem_keychain.requestCustomJson(SE.User.name, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Withdraw STEEM', function(response) {
+      hive_keychain.requestCustomJson(SE.User.name, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Withdraw HIVE', function(response) {
         if(response.success && response.result) {
 					SE.CheckTransaction(response.result.id, 3, tx => {
             if(tx.success)
-              SE.ShowToast(true, amount.toFixed(3) + ' STEEMP withdrawn to @' + SE.User.name);
+              SE.ShowToast(true, amount.toFixed(3) + ' SWAP.HIVE withdrawn to @' + SE.User.name);
             else
               SE.ShowToast(false, 'An error occurred submitting the transaction: ' + tx.error)
 
