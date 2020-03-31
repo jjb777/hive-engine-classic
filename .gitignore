@@ -1,2 +1,4 @@
 /.vs
 *.sln
+
+.DS_Store
