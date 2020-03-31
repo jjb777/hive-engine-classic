@@ -19,16 +19,16 @@
                 <%= addCommas(SE.User.account.balance) %>
             </p>
 
-            <label class="mb-0">Current STEEMP Balance</label>
+            <label class="mb-0">Current HIVE Balance</label>
             <p class="mb-4">
-                <%= addCommas(SE.GetBalance('STEEMP')) + ' STEEMP' %>
+                <%= addCommas(SE.GetBalance('SWAP.HIVE')) + ' HIVE' %>
             </p>
 
             <label>WITHDRAW AMOUNT</label>
             <div class="input-group justify-content-center align-items-center">
                 <input type="text" placeholder="0.000" id="withdraw_amount">
                 <div class="input-group-append">
-                    STEEMP
+                    HIVE
                 </div>
                 <div class="invalid-tooltip">
                     Please enter an amount greater than 0

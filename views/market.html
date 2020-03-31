@@ -31,7 +31,7 @@
 </div>
 
 <script>
-    var token_data = SE.Tokens.filter(t => t.symbol != 'STEEMP');
+    var token_data = SE.Tokens.filter(t => t.symbol != 'SWAP.HIVE');
     token_data = token_data.filter(t => t.metadata && !t.metadata.hide_in_market);
 
     SE.ShowMarketView('<%= data.selected %>');

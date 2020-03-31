@@ -9,7 +9,7 @@ Config = {
     NATIVE_TOKEN: 'SSC',
     STEEMP_ACCOUNT: 'steemsc',
     DISABLED_TOKENS: ['BTC', 'LTC', 'STEEM', 'SBD', 'BCC', 'XAP', 'XRP', 'GOLOS', 'DISNEY', 'AMAZON', 'VOICE', 'ETH', 'EOS', 'TIME', 'DONE', 'BNB'],
-    PEGGED_TOKEN: 'STEEMP',
+    PEGGED_TOKEN: 'SWAP.HIVE',
     PEGGED_TOKENS: [{
             name: 'Bitcoin',
             symbol: 'BTC',
