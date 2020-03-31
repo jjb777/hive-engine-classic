@@ -307,7 +307,7 @@ SE = {
                     SE.HideLoading();
             });
         } else {
-            SE.SteemConnectJson('active', transaction_data, () => {
+            SE.HiveSignerJson('active', transaction_data, () => {
                 SE.LoadTokens(() => SE.ShowMarketView(symbol, SE.User.name));
             });
         }
@@ -357,7 +357,7 @@ SE = {
                 }
             });
         } else {
-            SE.SteemConnectJson('active', transaction_data, () => {
+            SE.HiveSignerJson('active', transaction_data, () => {
                 SE.ShowMarketView(symbol, SE.User.name);
             });
         }
@@ -513,7 +513,7 @@ SE = {
                 }
             });
         } else {
-            SE.SteemConnectJsonId('posting', 'scot_claim_token', claimData, () => {
+            SE.HiveSignerJsonId('posting', 'scot_claim_token', claimData, () => {
                 SE.HideLoading();
                 SE.ShowRewards();
             });
@@ -559,7 +559,7 @@ SE = {
                 }
             });
         } else {
-            SE.SteemConnectJson('active', transaction_data, () => {
+            SE.HiveSignerJson('active', transaction_data, () => {
                 SE.HideLoading();
                 SE.HideDialog();
             });
@@ -605,7 +605,7 @@ SE = {
                 }
             });
         } else {
-            SE.SteemConnectJson('active', transaction_data, () => {
+            SE.HiveSignerJson('active', transaction_data, () => {
                 SE.ShowBalances(SE.User.name);
             });
         }
@@ -648,7 +648,7 @@ SE = {
                 }
             });
         } else {
-            SE.SteemConnectJson('active', transaction_data, () => {
+            SE.HiveSignerJson('active', transaction_data, () => {
                 SE.HideLoading();
                 SE.HideDialog();
             });
@@ -692,7 +692,7 @@ SE = {
                 }
             });
         } else {
-            SE.SteemConnectJson('active', transaction_data, () => {
+            SE.HiveSignerJson('active', transaction_data, () => {
                 SE.HideLoading();
                 SE.HideDialog();
                 SE.ShowHomeView('pending_unstakes');
@@ -738,7 +738,7 @@ SE = {
                 }
             });
         } else {
-            SE.SteemConnectJson('active', transaction_data, () => {
+            SE.HiveSignerJson('active', transaction_data, () => {
                 SE.HideLoading();
                 SE.HideDialog();
             });
@@ -784,7 +784,7 @@ SE = {
                 }
             });
         } else {
-            SE.SteemConnectJson('active', transaction_data, () => {
+            SE.HiveSignerJson('active', transaction_data, () => {
                 SE.ShowBalances(SE.User.name);
             });
         }
@@ -828,7 +828,7 @@ SE = {
                 }
             });
         } else {
-            SE.SteemConnectJson('active', transaction_data, () => {
+            SE.HiveSignerJson('active', transaction_data, () => {
                 SE.HideLoading();
                 SE.HideDialog();
             });
@@ -1115,7 +1115,7 @@ SE = {
                     SE.HideLoading()
             });
         } else {
-            SE.SteemConnectJson('active', transaction_data, () => {
+            SE.HiveSignerJson('active', transaction_data, () => {
                 SE.LoadTokens(() => SE.ShowHistory(symbol));
             });
         }
@@ -1158,7 +1158,7 @@ SE = {
                 }
             });
         } else {
-            SE.SteemConnectJson('active', transaction_data, () => {
+            SE.HiveSignerJson('active', transaction_data, () => {
                 SE.LoadTokens(() => SE.ShowHistory(symbol));
             });
         }
@@ -1204,7 +1204,7 @@ SE = {
                     SE.HideLoading()
             });
         } else {
-            SE.SteemConnectJson('active', registration_data, () => {
+            SE.HiveSignerJson('active', registration_data, () => {
                 SE.LoadTokens(() => SE.ShowHistory(symbol));
             });
         }
@@ -1250,7 +1250,7 @@ SE = {
                     SE.HideLoading();
             });
         } else {
-            SE.SteemConnectJson('active', transaction_data, () => {
+            SE.HiveSignerJson('active', transaction_data, () => {
                 SE.LoadTokens(() => SE.LoadBalances(SE.User.name, () => SE.ShowHistory(symbol)));
             });
         }
@@ -1323,7 +1323,7 @@ SE = {
                     SE.HideLoading();
             });
         } else {
-            SE.SteemConnectJson('active', transaction_data, () => {
+            SE.HiveSignerJson('active', transaction_data, () => {
                 SE.LoadBalances(SE.User.name, () => SE.ShowHistory(symbol));
             });
         }
@@ -1367,7 +1367,7 @@ SE = {
             });
         } else {
             SE.HideLoading();
-            SE.SteemConnectTransfer(SE.User.name, 'steemsc', (amount).toFixedNoRounding(3) + ' HIVE', JSON.stringify(transaction_data), () => {
+            SE.HiveSignerTransfer(SE.User.name, 'steemsc', (amount).toFixedNoRounding(3) + ' HIVE', JSON.stringify(transaction_data), () => {
                 SE.LoadBalances(SE.User.name, () => SE.ShowHistory(Config.NATIVE_TOKEN, 'Hive Engine Tokens'));
             });
         }
@@ -1407,7 +1407,7 @@ SE = {
             });
         } else {
             SE.HideLoading();
-            SE.SteemConnectTransfer(SE.User.name, Config.STEEMP_ACCOUNT, (amount).toFixedNoRounding(3) + ' HIVE', JSON.stringify(transaction_data), () => {
+            SE.HiveSignerTransfer(SE.User.name, Config.STEEMP_ACCOUNT, (amount).toFixedNoRounding(3) + ' HIVE', JSON.stringify(transaction_data), () => {
                 SE.LoadBalances(SE.User.name, () => SE.ShowMarket());
             });
         }
@@ -1447,7 +1447,7 @@ SE = {
                     SE.HideLoading();
             });
         } else {
-            SE.SteemConnectJson('active', transaction_data, () => {
+            SE.HiveSignerJson('active', transaction_data, () => {
                 SE.LoadBalances(SE.User.name, () => SE.ShowMarket());
             });
         }
@@ -1458,12 +1458,12 @@ SE = {
     },
 
     _sc_callback: null,
-    SteemConnectJson: function(auth_type, data, callback) {
+    HiveSignerJson: function(auth_type, data, callback) {
         SE.HideLoading();
-        SE.ShowDialog('steem_connect')
+        SE.ShowDialog('hivesigner')
 
         var username = localStorage.getItem('username');
-        var url = 'https://steemconnect.com/sign/custom-json?';
+        var url = 'https://hivesigner.com/sign/custom-json?';
 
         if (auth_type == 'active') {
             url += 'required_posting_auths=' + encodeURI('[]');
@@ -1475,16 +1475,16 @@ SE = {
         url += '&id=' + Config.CHAIN_ID;
         url += '&json=' + encodeURI(JSON.stringify(data));
 
-        popupCenter(url, 'steemconnect', 500, 560);
+        popupCenter(url, 'hivesigner', 500, 560);
         SE._sc_callback = callback;
     },
 
-    SteemConnectJsonId: function(auth_type, id, data, callback) {
+    HiveSignerJsonId: function(auth_type, id, data, callback) {
         SE.HideLoading();
-        SE.ShowDialog('steem_connect')
+        SE.ShowDialog('hivesigner')
 
         var username = localStorage.getItem('username');
-        var url = 'https://steemconnect.com/sign/custom-json?';
+        var url = 'https://hivesigner.com/sign/custom-json?';
 
         if (auth_type == 'active') {
             url += 'required_posting_auths=' + encodeURI('[]');
@@ -1497,25 +1497,25 @@ SE = {
         url += '&id=' + id;
         url += '&json=' + encodeURI(JSON.stringify(data));
 
-        popupCenter(url, 'steemconnect', 500, 560);
+        popupCenter(url, 'hivesigner', 500, 560);
         SE._sc_callback = callback;
     },
 
-    SteemConnectTransfer: function(from, to, amount, memo, callback) {
+    HiveSignerTransfer: function(from, to, amount, memo, callback) {
         SE.HideLoading();
-        SE.ShowDialog('steem_connect')
+        SE.ShowDialog('hivesigner')
 
-        var url = 'https://steemconnect.com/sign/transfer?';
+        var url = 'https://hivesigner.com/sign/transfer?';
         url += '&from=' + encodeURI(from);
         url += '&to=' + encodeURI(to);
         url += '&amount=' + encodeURI(amount);
         url += '&memo=' + encodeURI(memo);
 
-        popupCenter(url, 'steemconnect', 500, 560);
+        popupCenter(url, 'hivesigner', 500, 560);
         SE._sc_callback = callback;
     },
 
-    SteemConnectCallback: function() {
+    HiveSignerCallback: function() {
         if (SE._sc_callback) {
             SE.ShowLoading();
 
