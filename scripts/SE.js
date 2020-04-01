@@ -214,7 +214,7 @@ SE = {
 
             let user_orders = [];
             let user_token_balance = null;
-            let user_steemp_balance = null;
+            let user_hive_balance = null;
             if (account) {
                 // prepare user orders and balance
                 let user_buy_orders = results[3].map(o => {
@@ -233,7 +233,7 @@ SE = {
                 user_orders.sort((a, b) => b.timestamp - a.timestamp);
 
                 user_token_balance = _.find(results[5], (balance) => balance.symbol === symbol);
-                user_steemp_balance = _.find(results[5], (balance) => balance.symbol === 'SWAP.HIVE');
+                user_hive_balance = _.find(results[5], (balance) => balance.symbol === 'SWAP.HIVE');
             }
 
             $('#market_view').html(render('market_view', {
@@ -245,7 +245,7 @@ SE = {
                     trade_history: trade_history,
                     user_orders: user_orders,
                     user_token_balance: user_token_balance,
-                    user_steemp_balance: user_steemp_balance
+                    user_hive_balance: user_hive_balance
                 }
             }));
 
@@ -421,12 +421,12 @@ SE = {
                     return (b.volume > 0 ? b.volume : b.marketCap / 1000000000000) - (a.volume > 0 ? a.volume : a.marketCap / 1000000000000);
                 });
 
-                var steemp_balance = await ssc.findOne('tokens', 'balances', { account: 'honey-swap', symbol: 'SWAP.HIVE' });
+                var hive_balance = await ssc.findOne('tokens', 'balances', { account: 'honey-swap', symbol: 'SWAP.HIVE' });
 
-                if (steemp_balance && steemp_balance.balance) {
+                if (hive_balance && hive_balance.balance) {
                     var token = SE.GetToken('SWAP.HIVE');
-                    token.supply -= parseFloat(steemp_balance.balance);
-                    token.circulatingSupply -= parseFloat(steemp_balance.balance);
+                    token.supply -= parseFloat(hive_balance.balance);
+                    token.circulatingSupply -= parseFloat(hive_balance.balance);
                 }
 
                 if (callback)
