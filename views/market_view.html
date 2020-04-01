@@ -86,7 +86,7 @@
                         <label style="min-width: 90px;">Price</label>
                         <input type="number" id="sellPrice" placeholder="0.0" class="text-right" style="width: 180px;">
                         <div class="input-group-append">
-                            <span class="input-group-text">Steem/<%= data.token %></span>
+                            <span class="input-group-text">Hive/<%= data.token %></span>
                         </div>
                         <div class="invalid-feedback">
                             Required field. Price must be a number greater than 0.
@@ -110,7 +110,7 @@
                         <label style="min-width: 90px;">Total</label>
                         <input type="number" id="sellTotal" placeholder="0.0" class="text-right" style="width: 180px;" readonly disabled>
                         <div class="input-group-append">
-                            <span class="input-group-text">Steem</span>
+                            <span class="input-group-text">Hive</span>
                         </div>
                         <div class="invalid-feedback">
                             Your balance is too low to confirm this order.
@@ -184,7 +184,7 @@
         return addCommas(value.toFixed(data.precision));
     }
 
-    function SteemAmountColumn(value, options, rowdata) {
+    function HiveAmountColumn(value, options, rowdata) {
         return addCommas(value.toFixed(5));
     }
 
@@ -221,13 +221,13 @@
             "title": "Total HIVE",
             "type": "number",
             "classes": "text-right",
-            "formatter": SteemAmountColumn
+            "formatter": HiveAmountColumn
         }, {
             "name": "amountLocked",
             "title": "HIVE",
             "type": "number",
             "classes": "text-right",
-            "formatter": SteemAmountColumn
+            "formatter": HiveAmountColumn
         }, {
             "name": "quantity",
             "title": data.token + " (Qty)",
@@ -272,13 +272,13 @@
             "title": "HIVE",
             "type": "number",
             "classes": "text-right",
-            "formatter": SteemAmountColumn
+            "formatter": HiveAmountColumn
         }, {
             "name": "total",
             "title": "Total HIVE",
             "type": "number",
             "classes": "text-right",
-            "formatter": SteemAmountColumn
+            "formatter": HiveAmountColumn
         }],
         "rows": data.sell_orders.slice(0, 15)
     });
@@ -315,10 +315,10 @@
             "classes": "text-right"
         }, {
             "name": "total",
-            "title": "Steem",
+            "title": "Hive",
             "type": "number",
             "classes": "text-right",
-            "formatter": SteemAmountColumn
+            "formatter": HiveAmountColumn
         }, {
             "name": "action",
             "title": "Action",
@@ -378,7 +378,7 @@
             "title": "Total HIVE",
             "type": "number",
             "classes": "text-right",
-            "formatter": SteemAmountColumn
+            "formatter": HiveAmountColumn
         }, ],
         "rows": data.trade_history
     });
