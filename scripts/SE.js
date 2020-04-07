@@ -920,8 +920,8 @@ SE = {
     },
 
     ShowConversionHistory: function() {
-        $.get('https://converter-api.steem-engine.com/api/conversions/', { limit: 20, offset: 0, deposit__from_account: SE.User.name }, from_result => {
-            $.get('https://converter-api.steem-engine.com/api/conversions/', { limit: 20, offset: 0, to_address: SE.User.name }, to_result => {
+        $.get('https://converter-api.hive-engine.com/api/conversions/', { limit: 20, offset: 0, deposit__from_account: SE.User.name }, from_result => {
+            $.get('https://converter-api.hive-engine.com/api/conversions/', { limit: 20, offset: 0, to_address: SE.User.name }, to_result => {
                 var to_results = to_result.results.map(r => {
                     return {
                         coin_symbol: r.from_coin_symbol,

@@ -3,7 +3,7 @@ Config = {
     CHAIN_ID: 'ssc-mainnet-hive',
     RPC_URL: 'https://api.hive-engine.com/rpc',
     ACCOUNTS_API_URL: 'https://api.steem-engine.com/accounts',
-    CONVERTER_API: 'https://converter-api.steem-engine.com/api',
+    CONVERTER_API: 'https://converter-api.hive-engine.com/api',
     SCOT_API: 'https://scot-api.steem-engine.com/',
     NODE_API: 'https://node-api.steem-engine.com/v1/',
     NATIVE_TOKEN: 'BEE',
