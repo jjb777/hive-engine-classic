@@ -11,11 +11,6 @@ Config = {
     DISABLED_TOKENS: ['BTC', 'LTC', 'STEEM', 'SBD', 'HIVE', 'HBD', 'BCC', 'XAP', 'XRP', 'GOLOS', 'DISNEY', 'AMAZON', 'VOICE', 'ETH', 'EOS', 'TIME', 'DONE', 'BNB', 'LASSE', 'R', 'SCTR', 'ALLAH', 'ETHER', 'LTCPEG', 'SBC'],
     PEGGED_TOKEN: 'SWAP.HIVE',
     PEGGED_TOKENS: [{
-            name: 'Steem Engine',
-            symbol: 'ENG',
-            pegged_token_symbol: 'SWAP.ENG'
-        },
-        {
             name: 'Hive',
             symbol: 'HIVE',
             pegged_token_symbol: 'SWAP.HIVE'
