@@ -12,7 +12,7 @@ Config = {
     PEGGED_TOKEN: 'SWAP.HIVE',
     PEGGED_TOKENS: [{
             name: 'Steem Engine',
-            symbol: 'ENG',
+            symbol: 'SWAP.ENG',
             pegged_token_symbol: 'SWAP.ENG'
         },
         {
