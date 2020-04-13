@@ -2,7 +2,7 @@ Config = {
     MAINTENANCE_MODE: false,
     CHAIN_ID: 'ssc-mainnet-hive',
     RPC_URL: 'https://api.hive-engine.com/rpc',
-    ACCOUNTS_API_URL: 'https://api.hive-engine.com/accounts',
+    ACCOUNTS_API_URL: 'https://accounts.hive-engine.com/accountHistory',
     CONVERTER_API: 'https://converter-api.hive-engine.com/api',
     SCOT_API: 'https://scot-api.hive-engine.com/',
     NODE_API: 'https://node-api.hive-engine.com/v1/',
