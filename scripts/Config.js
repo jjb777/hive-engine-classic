@@ -8,7 +8,7 @@ Config = {
     NODE_API: 'https://node-api.hive-engine.com/v1/',
     NATIVE_TOKEN: 'BEE',
     STEEMP_ACCOUNT: 'honey-swap',
-    DISABLED_TOKENS: ['BTC', 'LTC', 'STEEM', 'SBD', 'HIVE', 'HBD', 'BCC', 'XAP', 'XRP', 'GOLOS', 'DISNEY', 'AMAZON', 'VOICE', 'ETH', 'EOS', 'TIME', 'DONE', 'BNB', 'LASSE', 'R', 'SCTR', 'ALLAH', 'ETHER', 'LTCPEG', 'SBC'],
+    DISABLED_TOKENS: ['BTC', 'LTC', 'STEEM', 'SBD', 'HIVE', 'HBD', 'BCC', 'XAP', 'XRP', 'GOLOS', 'DISNEY', 'AMAZON', 'VOICE', 'ETH', 'EOS', 'TIME', 'DONE', 'BNB', 'LASSE', 'R', 'SCTR', 'ALLAH', 'ETHER', 'LTCPEG', 'SBC', 'TIX', 'TIXM'],
     PEGGED_TOKEN: 'SWAP.HIVE',
     PEGGED_TOKENS: [{
             name: 'Hive',
