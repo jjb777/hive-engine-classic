@@ -73,8 +73,8 @@ function addCommas(nStr, currency) {
 }
 
 function loadSteemPrice(callback) {
-    $.get('https://postpromoter.net/api/prices', function(data) {
-        window.steem_price = parseFloat(data.steem_price);
+    $.get('https://api.coingecko.com/api/v3/simple/price?ids=HIVE&vs_currencies=USD', function (data) {
+        window.steem_price = parseFloat(data.hive.usd);
 
         if (callback)
             callback(window.steem_price);
