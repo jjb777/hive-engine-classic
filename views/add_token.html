@@ -7,7 +7,7 @@
     <p>
         <span class="font-weight-bold">NOTE: Token Creation costs <%= addCommas(SE.Params.tokenCreationFee) + ' ' + Config.NATIVE_TOKEN %> (Hive Engine Native Tokens)</span></br>
         Your Current BEE Balance:
-        <%= addCommas(SE.GetBalance(Config.NATIVE_TOKEN)) + ' ' + Config.NATIVE_TOKEN %> (<a href="javascript:void(0);" onclick="SE.ShowBuySSC();" style="color: #8E4A2C; font-weight: bold;">BUY BEE with HIVE</a>)
+        <%= addCommas(SE.GetBalance(Config.NATIVE_TOKEN)) + ' ' + Config.NATIVE_TOKEN %> (<a href="javascript:void(0);" onclick="SE.ShowMarket('BEE');" style="color: #8E4A2C; font-weight: bold;">BUY BEE</a>)
     </p>
 </div>
 

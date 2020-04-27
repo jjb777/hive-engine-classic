@@ -1,83 +1,133 @@
 <header>
-  <div class="group">
-    <h1 class="m-0 p-0">TOKENS</h1>    
-    <div class="buttons">
-			<input type="text" class="search" placeholder="Search Tokens"/>
+    <div class="group">
+        <h1 class="m-0 p-0">TOKENS</h1>
+        <div class="buttons">
+            <input type="text" class="search" placeholder="Search Tokens" />
 
-			<% if(SE.User) { %>
-				<button class="btn btn-primary" onclick="SE.ShowBuySSC();">BUY <%= Config.NATIVE_TOKEN %></button>
-				<button class="btn btn-secondary" onclick="SE.ShowAddToken();">CREATE</button>
-			<% } %>
+            <% if(SE.User) { %>
+                <button class="btn btn-primary" onclick="SE.ShowMarket('BEE');">BUY <%= Config.NATIVE_TOKEN %></button>
+                <button class="btn btn-secondary" onclick="SE.ShowAddToken();">CREATE</button>
+                <% } %>
+        </div>
     </div>
-  </div>  
 </header>
 
 <div class="container tokens-container">
-  <table id="tokens_table" class="tokensTable interactiveTable" data-sorting="true"></table>
+    <table id="tokens_table" class="tokensTable interactiveTable" data-sorting="true"></table>
 </div>
 
-<script>	
-	function IconColumn(value, options, rowdata) { 
-		return `<i class="fas fa-info-circle" onclick="SE.ShowDialog('token_info', SE.GetToken('${value}'));"></i>&nbsp;&nbsp;&nbsp;` +
-			`<i class="fas fa-exchange-alt" onclick="SE.ShowMarket('${value}');"></i>&nbsp;&nbsp;&nbsp;` +
-			`<i class="fas fa-list-ul" onclick="SE.ShowHistory('${value}', '${rowdata.name}')"></i>`; 
-	}
+<script>
+    function IconColumn(value, options, rowdata) {
+        return `<i class="fas fa-info-circle" onclick="SE.ShowDialog('token_info', SE.GetToken('${value}'));"></i>&nbsp;&nbsp;&nbsp;` +
+            `<i class="fas fa-exchange-alt" onclick="SE.ShowMarket('${value}');"></i>&nbsp;&nbsp;&nbsp;` +
+            `<i class="fas fa-list-ul" onclick="SE.ShowHistory('${value}', '${rowdata.name}')"></i>`;
+    }
 
-	function SupplyColumn(value, options, rowdata) { return addCommas((value == null) ? 0 : +value.toFixed(3)); }
-	function SymbolColumn(value, options, rowdata) { 
-		var token = SE.GetToken(value);
+    function SupplyColumn(value, options, rowdata) {
+        return addCommas((value == null) ? 0 : +value.toFixed(3));
+    }
 
-		if(token && token.metadata && token.metadata.icon)
-			return '<img class="icon" src="' + token.metadata.icon + '"/>';
-		else
-			return ''; 
-	}
-	function USDValueColumn(value, options, rowdata) { return value ? usdFormat(value) : '--'; }
-	function PriceColumn(value, options, rowdata) { return value ? '<span class="' + (rowdata.priceChangePercent > 0 ? 'green' : (rowdata.priceChangePercent < 0 ? 'red' : '')) + '">' + usdFormat(value) + '</span>' : '--'; }
-	function PctColumn(value, options, rowdata) { return '<span class="' + (value > 0 ? 'green' : (value < 0 ? 'red' : '')) + '">' + value.toFixed(2) + '%</span>'; }
-	function URLFormatter(value, options, rowdata)
-	{
-		if(value != null) {
-			if(!value.startsWith('http'))
-				value = 'http://' + value;
-				
-			return '<a href="' + value + '" target="_blank" >' + value + '</a>';
-		} else
-			return '';
-	}
+    function SymbolColumn(value, options, rowdata) {
+        var token = SE.GetToken(value);
 
-	createTable(SE.Tokens);
-	function createTable(data) {
-		$('#tokens_table').empty();
-		$('#tokens_table').footable({
-			"columns": [
-				{ "name": "symbol", "title": "", "classes": "icon", "formatter": SymbolColumn },
-				{ "name": "symbol", "classes": "symbol", "title": "Symbol" },
-				{ "name": "name", "title": "Token Name" },
-				{ "name": "marketCap", "title": "Market Cap", "type": "number", "classes": "text-right", "formatter": USDValueColumn },
-				{ "name": "lastPrice", "title": "Price", "type": "number", "classes": "text-right bold", "formatter": PriceColumn },
-				{ "name": "priceChangePercent", "title": "% Chg", "type": "number", "classes": "text-right bold", "formatter": PctColumn },
-				{ "name": "volume", "title": "24h Vol", "type": "number", "classes": "text-right", "formatter": USDValueColumn },
-				{ "name": "circulatingSupply", "title": "Supply", "type": "number", "classes": "text-right", "formatter": SupplyColumn },    
-				{ "name": "symbol", "title": "", "classes": "icons", "formatter": IconColumn }
-			],
-			"rows": data
-		});
-	}
+        if (token && token.metadata && token.metadata.icon)
+            return '<img class="icon" src="' + token.metadata.icon + '"/>';
+        else
+            return '';
+    }
 
-	$('input.search').keyup(() => {
-		var val = $('input.search').val().toLowerCase();
-		$('#tokens_table tr').each((i, r) => {
-			r = $(r);
-			var td = r.children('td');
+    function USDValueColumn(value, options, rowdata) {
+        return value ? usdFormat(value) : '--';
+    }
 
-			if(td.length > 1) {
-				if(td[1].innerText.toLowerCase().indexOf(val) >= 0 || td[2].innerText.toLowerCase().indexOf(val) >= 0)
-					r.show();
-				else
-					r.hide();
-			}
-		});
-		//createTable(token_data.filter(d => d.symbol.indexOf(val) >= 0 || d.name.indexOf(val) >= 0));
-	})
+    function PriceColumn(value, options, rowdata) {
+        return value ? '<span class="' + (rowdata.priceChangePercent > 0 ? 'green' : (rowdata.priceChangePercent < 0 ? 'red' : '')) + '">' + usdFormat(value) + '</span>' : '--';
+    }
+
+    function PctColumn(value, options, rowdata) {
+        return '<span class="' + (value > 0 ? 'green' : (value < 0 ? 'red' : '')) + '">' + value.toFixed(2) + '%</span>';
+    }
+
+    function URLFormatter(value, options, rowdata) {
+        if (value != null) {
+            if (!value.startsWith('http'))
+                value = 'http://' + value;
+
+            return '<a href="' + value + '" target="_blank" >' + value + '</a>';
+        } else
+            return '';
+    }
+
+    createTable(SE.Tokens);
+
+    function createTable(data) {
+        $('#tokens_table').empty();
+        $('#tokens_table').footable({
+            "columns": [{
+                "name": "symbol",
+                "title": "",
+                "classes": "icon",
+                "formatter": SymbolColumn
+            }, {
+                "name": "symbol",
+                "classes": "symbol",
+                "title": "Symbol"
+            }, {
+                "name": "name",
+                "title": "Token Name"
+            }, {
+                "name": "marketCap",
+                "title": "Market Cap",
+                "type": "number",
+                "classes": "text-right",
+                "formatter": USDValueColumn
+            }, {
+                "name": "lastPrice",
+                "title": "Price",
+                "type": "number",
+                "classes": "text-right bold",
+                "formatter": PriceColumn
+            }, {
+                "name": "priceChangePercent",
+                "title": "% Chg",
+                "type": "number",
+                "classes": "text-right bold",
+                "formatter": PctColumn
+            }, {
+                "name": "volume",
+                "title": "24h Vol",
+                "type": "number",
+                "classes": "text-right",
+                "formatter": USDValueColumn
+            }, {
+                "name": "circulatingSupply",
+                "title": "Supply",
+                "type": "number",
+                "classes": "text-right",
+                "formatter": SupplyColumn
+            }, {
+                "name": "symbol",
+                "title": "",
+                "classes": "icons",
+                "formatter": IconColumn
+            }],
+            "rows": data
+        });
+    }
+
+    $('input.search').keyup(() => {
+        var val = $('input.search').val().toLowerCase();
+        $('#tokens_table tr').each((i, r) => {
+            r = $(r);
+            var td = r.children('td');
+
+            if (td.length > 1) {
+                if (td[1].innerText.toLowerCase().indexOf(val) >= 0 || td[2].innerText.toLowerCase().indexOf(val) >= 0)
+                    r.show();
+                else
+                    r.hide();
+            }
+        });
+        //createTable(token_data.filter(d => d.symbol.indexOf(val) >= 0 || d.name.indexOf(val) >= 0));
+    })
 </script>

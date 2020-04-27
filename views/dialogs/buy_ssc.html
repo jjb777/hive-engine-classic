@@ -31,8 +31,7 @@
                 </div>
             </div>
             <div class="ssc-cost">1
-                <%= Config.NATIVE_TOKEN %> =
-                    <%= SE.Params.priceSteem * 1000 %> HIVE</div>
+                <%= Config.NATIVE_TOKEN %> = 1 HIVE</div>
 
         </div>
 
@@ -49,7 +48,7 @@
         if (isNaN(amount) || amount == 0) {
             $('#ssc_amount').addClass("is-invalid");
         } else {
-            SE.BuySSC(amount * <%= SE.Params.priceSteem * 1000 %>);
+            SE.BuySSC(amount * 1);
         }
 
     }
