@@ -82,8 +82,8 @@ Config = {
         },
         {
             name: 'Weed',
-            symbol: 'WEED',
-            pegged_token_symbol: 'EOSWEED'
+            symbol: 'EOSWEED',
+            pegged_token_symbol: 'WEED'
         }
     ]
 }
