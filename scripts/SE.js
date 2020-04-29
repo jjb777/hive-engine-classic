@@ -182,12 +182,17 @@ SE = {
         let tasks = [];
         tasks.push(ssc.find('market', 'buyBook', { symbol: symbol }, 200, 0, [{ index: 'priceDec', descending: true }], false));
         tasks.push(ssc.find('market', 'sellBook', { symbol: symbol }, 200, 0, [{ index: 'priceDec', descending: false }], false));
-        tasks.push(ssc.find('market', 'tradesHistory', { symbol: symbol }, 30, 0, [{ index: '_id', descending: true }], false));
+        tasks.push(ssc.find('market', 'tradesHistory', { symbol: symbol }, 30, 0, [{ index: '_id', descending: true }], false));                       
+
+        let marketHistoryGet = Config.HISTORY_API + 'marketHistory?symbol=' + symbol;        
+        tasks.push($.get(marketHistoryGet));
+
         if (account) {
             tasks.push(ssc.find('market', 'buyBook', { symbol: symbol, account: account }, 100, 0, [{ index: '_id', descending: true }], false));
             tasks.push(ssc.find('market', 'sellBook', { symbol: symbol, account: account }, 100, 0, [{ index: '_id', descending: true }], false));
             tasks.push(ssc.find('tokens', 'balances', { account: account, symbol: { '$in': [symbol, 'SWAP.HIVE'] } }, 2, 0, '', false));
         }
+        
         Promise.all(tasks).then(results => {
             // prepare buy orders
             var buy_total = 0;
@@ -212,18 +217,29 @@ SE = {
                 return o;
             });
 
+            const limitCandleStick = 60;            
+            let market_history = results[3].slice(0, limitCandleStick).map(x => {
+                return {
+                    t: moment.unix(x.timestamp).format('YYYY-MM-DD HH:mm:ss'), //x.timestamp * 1000,
+                    o: x.openPrice,
+                    h: x.highestPrice,
+                    l: x.lowestPrice,
+                    c: x.closePrice,
+                }
+            });
+            
             let user_orders = [];
             let user_token_balance = null;
             let user_hive_balance = null;
             if (account) {
                 // prepare user orders and balance
-                let user_buy_orders = results[3].map(o => {
+                let user_buy_orders = results[4].map(o => {
                     o.type = 'buy';
                     o.total = o.price * o.quantity;
                     o.timestamp_string = moment.unix(o.timestamp).format('YYYY-M-DD HH:mm:ss');
                     return o;
                 });
-                let user_sell_orders = results[4].map(o => {
+                let user_sell_orders = results[5].map(o => {
                     o.type = 'sell';
                     o.total = o.price * o.quantity;
                     o.timestamp_string = moment.unix(o.timestamp).format('YYYY-M-DD HH:mm:ss');
@@ -232,8 +248,8 @@ SE = {
                 user_orders = user_buy_orders.concat(user_sell_orders);
                 user_orders.sort((a, b) => b.timestamp - a.timestamp);
 
-                user_token_balance = _.find(results[5], (balance) => balance.symbol === symbol);
-                user_hive_balance = _.find(results[5], (balance) => balance.symbol === 'SWAP.HIVE');
+                user_token_balance = _.find(results[6], (balance) => balance.symbol === symbol);
+                user_hive_balance = _.find(results[6], (balance) => balance.symbol === 'SWAP.HIVE');
             }
 
             $('#market_view').html(render('market_view', {
@@ -243,6 +259,7 @@ SE = {
                     buy_orders: buy_orders,
                     sell_orders: sell_orders,
                     trade_history: trade_history,
+                    market_history: market_history,
                     user_orders: user_orders,
                     user_token_balance: user_token_balance,
                     user_hive_balance: user_hive_balance
