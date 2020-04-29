@@ -79,6 +79,11 @@ Config = {
             name: 'Sand',
             symbol: 'SAND',
             pegged_token_symbol: 'EOSSAND'
+        },
+        {
+            name: 'Weed',
+            symbol: 'WEED',
+            pegged_token_symbol: 'EOSWEED'
         }
     ]
 }
