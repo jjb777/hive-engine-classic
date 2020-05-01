@@ -1067,7 +1067,8 @@ SE = {
                     }
                 }
 
-                $("#lnkUsername").html(`@${username} <span class="badge rewards">${rewardCount}</span>`);
+                if (rewardCount > 0)
+                    $("#lnkUsername").html(`@${username} <span class="badge rewards">${rewardCount}</span>`);
             }
         });
 
