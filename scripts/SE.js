@@ -483,7 +483,7 @@ SE = {
 
         SE.User.ScotTokens = [];
 
-        $.get(Config.SCOT_API + `@${account}`, { v: new Date().getTime() }, results => {
+        $.get(Config.SCOT_API + `@${account}`, { hive: 1, v: new Date().getTime() }, results => {
             if (results) {
                 let mapped = [];
 
@@ -535,6 +535,50 @@ SE = {
                 SE.ShowRewards();
             });
         }
+    },
+
+    ClaimAllTokens: function () {
+        SE.ShowLoading();
+
+        const username = SE.User.name;
+        const scotTokens = SE.User.ScotTokens;
+        
+        if (scotTokens && scotTokens.length > 0) {
+            let claimData = [];
+
+            for (let st of scotTokens) {
+                var token = SE.Tokens.find(t => t.symbol === st.symbol);
+
+                if (!token) {
+                    continue;
+                }
+
+                if (st.pending_token > 0) {
+                    claimData.push({ "symbol": st.symbol });
+                }
+            }
+
+            if (claimData.length > 0) {
+                if (useKeychain()) {
+                    hive_keychain.requestCustomJson(username, 'scot_claim_token', 'Posting', JSON.stringify(claimData), `Claim All Tokens`, function (response) {
+                        if (response.success && response.result) {
+                            SE.ShowToast(true, `All tokens claimed`);
+                            SE.HideLoading();
+                            SE.ShowRewards();
+                        } else {
+                            SE.HideLoading();
+                        }
+                    });
+                } else {
+                    SE.HiveSignerJsonId('posting', 'scot_claim_token', claimData, () => {
+                        SE.HideLoading();
+                        SE.ShowRewards();
+                    });
+                }
+            }
+        } else {
+            SE.HideLoading();
+        }                
     },
 
     EnableStaking: function(symbol, unstakingCooldown, numberTransactions) {
@@ -1012,9 +1056,18 @@ SE = {
         SE.LoadPendingUnstakes(username);
         SE.LoadPendingUndelegations(username);
 
-        SE.GetScotUserTokens(username, scotTokens => {
+        SE.GetScotUserTokens(username, scotTokens => {            
             if (scotTokens.length) {
-                $("#lnkUsername").html(`@${username} <span class="badge rewards">${scotTokens.length}</span>`);
+                var rewardCount = scotTokens.length;
+                for (let st of scotTokens) {
+                    var token = SE.Tokens.find(t => t.symbol === st.symbol);
+
+                    if (!token) {
+                        rewardCount--;
+                    }
+                }
+
+                $("#lnkUsername").html(`@${username} <span class="badge rewards">${rewardCount}</span>`);
             }
         });
 
