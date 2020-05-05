@@ -78,8 +78,18 @@ Config = {
         },
         {
             name: 'Sand',
-            symbol: 'SAND',
-            pegged_token_symbol: 'EOSSAND'
+            symbol: 'EOSSAND',
+            pegged_token_symbol: 'SAND'
+        },
+        {
+            name: 'Sand',
+            symbol: 'TELOSSAND',
+            pegged_token_symbol: 'SAND'
+        },
+        {
+            name: 'Kanda',
+            symbol: 'TELOSKANDA',
+            pegged_token_symbol: 'KANDA'
         },
         {
             name: 'Weed',
