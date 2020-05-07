@@ -1043,6 +1043,8 @@ SE = {
         SE.User = { name: username };
         $("#btnSignIn").hide();
         $("#lnkUsername").html(`@${username}`);
+        let explorerLink = $(".explorer-link").attr("href");
+        $(".explorer-link").attr("href", explorerLink + `@${username}`);
         $("#ddlLoggedIn").show();
         $('#nav_wallet').show();
 
