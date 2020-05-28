@@ -53,12 +53,31 @@
             symbol: symbol
         }, data => {
             var running_balance = typeof balance === 'number' ? balance : parseFloat(balance);
-            data.forEach(r => {
+                data.forEach(r => {
                 r.memo = r.memo ? filterXSS(r.memo) : null;
                 r.type = (r.to == SE.User.name) ? 'Received' : 'Sent';
                 r.to_from = (r.to == SE.User.name) ? r.from : r.to;
-                r.balance = running_balance.toFixed(token.precision);
-                running_balance = (r.to == SE.User.name) ? running_balance - parseFloat(r.quantity) : running_balance + parseFloat(r.quantity);
+                r.balance = running_balance.toFixed(token.precision);                   
+
+                var q = 0;
+                if (r.quantity)
+                    q = r.quantity;
+                else if (r.quantityLocked)
+                    q = r.quantityLocked;
+                else if (r.quantityTokens)
+                    q = r.quantityTokens;
+                else if (r.quantityReturned)
+                    q = r.quantityReturned;
+
+                r.quantity = q;
+
+                if (r.operation != "market_buy" && r.operation != "market_sell") {
+                    if (r.to == SE.User.name || r.operation == "market_cancel") {
+                        running_balance = running_balance - parseFloat(q);
+                    } else {
+                        running_balance = running_balance + parseFloat(q);
+                    }
+                }
             });
 
             $('#history_table').footable({
@@ -83,6 +102,9 @@
                     "name": "type",
                     "title": "Type"
                 }, {
+                    "name": "operation",
+                    "title": "Operation"
+                }, {
                     "name": "quantity",
                     "title": "Amount",
                     "type": "number",
@@ -99,8 +121,8 @@
             });
         });
 
-        function DateColumn(value, options, rowdata) {
-            return new Date(value).toLocaleString();
+        function DateColumn(value, options, rowdata) {            
+            return moment.unix(value).format('YYYY-MM-DD HH:mm:ss');
         }
 
         function SteemAccountColumn(value, options, rowdata) {
@@ -108,11 +130,14 @@
         }
 
         function BalanceColumn(value, options, rowdata) {
-            return addCommas(value) + ' ' + symbol;
+            var b = addCommas(value) + ' ' + symbol;
+
+            return b;
         }
 
         function AmountColumn(value, options, rowdata) {
-            var operator = (rowdata.type == 'Received') ? '+' : '-';
+            var operator = (rowdata.type == 'Received' || rowdata.operation == "market_cancel") ? '+' : '-';
+
             return '<div class="' + ((rowdata.type == 'Received') ? 'received' : 'sent') + '">' + operator + ' ' + addCommas(parseFloat(value).toFixed(token.precision)) + ' ' + symbol + '</div>';
         }
 
