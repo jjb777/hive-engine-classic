@@ -6,29 +6,33 @@
     </div>
 
     <div class="modal-body">      
-      <p class="mb-4">
-        <%= new Date(data.timestamp).toLocaleString() %> 
-			</p>						            
+        <p class="mb-4">
+            <%= moment.unix(data.timestamp).format('YYYY-MM-DD HH:mm:ss') %>
+        </p>						            
       
       <p class="mb-4">
         Transaction ID:
         </br>
-        <%= data.txid %>
+        <%= data.transactionId %>
       </p>
       
       <p class="mb-4">
-        Sidechain Block: <%= data.block %>
+        Sidechain Block: <%= data.blockNumber %>
       </p>
       
       <p class="mb-4">
         From: @<%= data.from %>
         </br>
-        To: @<%= data.to %>
+        To: @<%= !data.to ? SE.User.name : data.to %>
 			</p>
       
       <p class="mb-4">
-        Amount: <%= (data.type == 'Received') ? '+' : '-' %> <%= addCommas(data.quantity) %> <%= data.symbol %>
-			</p>   
+          Amount: <%= (data.type == 'Received' ||
+          data.operation == "market_buy" ||
+          data.operation == "market_cancel" ||
+          data.operation == "hivepegged_buy" ||
+          (data.operation == "tokens_transfer" && data.to == SE.User.name)) ? '+' : '-' %> <%= addCommas(data.quantity) %> <%= data.symbol %>
+      </p>   
 			
 			<% if(data.memo) { %>
 				<p class="mb-4">

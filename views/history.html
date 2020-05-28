@@ -114,12 +114,12 @@
                     "type": "number",
                     "classes": "text-right",
                     "formatter": AmountColumn
-                }, {
-                    "name": "balance",
-                    "title": "Balance",
-                    "type": "number",
-                    "classes": "text-right",
-                    "formatter": BalanceColumn
+                //}, {
+                //    "name": "balance",
+                //    "title": "Balance",
+                //    "type": "number",
+                //    "classes": "text-right",
+                //    "formatter": BalanceColumn
                 }],
                 "rows": data
             });
@@ -142,8 +142,10 @@
         function AmountColumn(value, options, rowdata) {
             var operator = "-";
             if (rowdata.type == 'Received' ||
+                rowdata.operation == "market_buy" ||
                 rowdata.operation == "market_cancel" ||
-                rowdata.operation == "hivepegged_buy") {
+                rowdata.operation == "hivepegged_buy" ||
+                (rowdata.operation == "tokens_transfer" && rowdata.to == SE.User.name)) {
                 operator = "+";
             }
 
