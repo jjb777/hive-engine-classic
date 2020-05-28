@@ -60,19 +60,23 @@
                 r.balance = running_balance.toFixed(token.precision);                   
 
                 var q = 0;
-                if (r.quantity)
-                    q = r.quantity;
-                else if (r.quantityLocked)
-                    q = r.quantityLocked;
-                else if (r.quantityTokens)
-                    q = r.quantityTokens;
-                else if (r.quantityReturned)
-                    q = r.quantityReturned;
+                    if (r.quantity)
+                        q = r.quantity;
+                    else if (r.quantityLocked)
+                        q = r.quantityLocked;
+                    else if (r.quantityTokens)
+                        q = r.quantityTokens;
+                    else if (r.quantityReturned)
+                        q = r.quantityReturned;
+                    else if (r.quantityUnlocked)
+                        q = r.quantityUnlocked;
 
                 r.quantity = q;
 
-                if (r.operation != "market_buy" && r.operation != "market_sell") {
-                    if (r.to == SE.User.name || r.operation == "market_cancel") {
+                    if (r.operation != "market_buy" && r.operation != "market_sell") {
+                        if (r.to == SE.User.name ||
+                            r.operation == "market_cancel" ||
+                            r.operation == "hivepegged_buy") {
                         running_balance = running_balance - parseFloat(q);
                     } else {
                         running_balance = running_balance + parseFloat(q);
@@ -136,7 +140,12 @@
         }
 
         function AmountColumn(value, options, rowdata) {
-            var operator = (rowdata.type == 'Received' || rowdata.operation == "market_cancel") ? '+' : '-';
+            var operator = "-";
+            if (rowdata.type == 'Received' ||
+                rowdata.operation == "market_cancel" ||
+                rowdata.operation == "hivepegged_buy") {
+                operator = "+";
+            }
 
             return '<div class="' + ((rowdata.type == 'Received') ? 'received' : 'sent') + '">' + operator + ' ' + addCommas(parseFloat(value).toFixed(token.precision)) + ' ' + symbol + '</div>';
         }
