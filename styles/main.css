@@ -1030,3 +1030,10 @@ table.tokensTable .fooicon-sort-desc:before {
     margin: 0px;
     padding: 0px;
 }
+
+.btnCancelSelected {
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 3px 10px;
+    margin: 10px 10px 0px 0px;
+}
