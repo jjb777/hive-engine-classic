@@ -46,8 +46,7 @@
 
         orders.push({ txId: txId, txType: txType, symbol: symbol });
         '<% } %>';
-
-        console.log(origin);
+        
         SE.SendCancelMarketOrderSelected(orders, origin);
     }
 
