@@ -1,13 +1,4 @@
 <div class="mt-3">
-    <div class="row">
-        <div class="col-md-12 text-center stats">
-            <h3 class="font-weight-bold mb-3">Market Depth (<%= data.token %>) <i class="fas fa-info-circle" style="cursor:pointer" onclick="SE.ShowDialog('token_info', SE.GetToken(data.token));"></i></h3>
-            <small class="m-1 label">Last: <span class="font-weight-bold text-dark"><%= data.trade_history && data.trade_history.length > 0 ? parseFloat(data.trade_history[0].price) + ' HIVE / ' + usdFormat(data.trade_history[0].price) : '--' %></span></small>
-            <small class="m-1 label">24h Vol: <span class="font-weight-bold text-dark"><%= addCommas(parseFloat(SE.Tokens.find(t => t.symbol == data.token).volume).toFixed()) + ' HIVE / ' + usdFormat(SE.Tokens.find(t => t.symbol == data.token).volume, 2) %></span></small>
-            <small class="m-1 label">Bid: <a id="highest-bid" class="font-weight-bold text-dark"><%= data.buy_orders && data.buy_orders.length > 0 ? parseFloat(data.buy_orders[0].price) + ' HIVE' : '--' %></a></small>
-            <small class="m-1 label">Ask: <a id="lowest-ask" class="font-weight-bold text-dark"><%= data.sell_orders && data.sell_orders.length > 0 ? parseFloat(data.sell_orders[0].price) + ' HIVE' : '--' %></a></small>
-        </div>
-    </div>
     <div class="row mt-4">
         <div class="col-md-12 text-center">
             <div class="chart-container">
@@ -15,12 +6,12 @@
                     <div class="chart-options">
                         <div class="chart-options-buttons text-center">
                             <button class="btn chart-icon set-chart-candle">
-                                <img src="./../../images/candlestick-chart.svg"
+                                <img src="./images/candlestick-chart.svg"
                                      alt="cs-icon"
                                      width="20px" /><span>Candlestick</span>
                             </button>
                             <button class="btn chart-icon set-chart-depth">
-                                <img src="./../../images/area-chart.svg"
+                                <img src="./images/area-chart.svg"
                                      alt="ac-icon"
                                      width="20px" /><span>Depth</span>
                             </button>
@@ -192,7 +183,33 @@
 </div>
 
 <script>
+    //var data = <%= JSON.stringify(data) %>;
     var data = <%= JSON.stringify(data) %>;
+  	//var sell_orders = data.sell_orders.slice(0, 15)
+  	var sell_orders = data.sell_orders
+
+    var sumQuantity = 0;
+    /*sell_orders.forEach(function() {
+  		sumQuantity = sumQuantity + this.quantity;
+  		this.sumQuantity = sumQuantity;
+  	});*/
+  	for (var i = 0; i < sell_orders.length; i++) {
+  		var item = sell_orders[i];
+  		sumQuantity = sumQuantity + parseFloat(item.quantity);
+  		item.sumQuantity = sumQuantity;
+  		item.index = i+1;
+  	}
+  	 console.log(sell_orders);
+  	 console.log(data.trade_history);
+  	 console.log(data.user_orders);
+  /*
+  	for (var i = 0; i < arr.length; i++){
+      var obj = arr[i];
+      for (var key in obj){
+          var attrName = key;
+          var attrValue = obj[key];
+      }
+  }*/
 
     function OrderTypeColumn(value, options, rowdata) {
         return `<strong class="text-${value === 'buy' ? 'success' : 'danger'}">${value.toUpperCase()}</strong>`
@@ -240,7 +257,9 @@
             "type": "number",
             "classes": "text-right",
             "formatter": HiveAmountColumn
-        }, {
+        },
+        { "name": "account", "title": "Buyer" },
+        {
             "name": "amountLocked",
             "title": "HIVE",
             "type": "number",
@@ -259,7 +278,8 @@
             "classes": "text-right",
             "formatter": OrderPriceColumn
         }],
-        "rows": data.buy_orders.slice(0, 15)
+        //"rows": data.buy_orders.slice(0, 15)
+        "rows": data.buy_orders
     });
 
     $('#buy_order_table').on("click", 'tr', function() {
@@ -279,13 +299,17 @@
             "type": "number",
             "classes": "text-right",
             "formatter": OrderPriceColumn
-        }, {
+        },
+        { "name": "account", "title": "Seller" },
+        {
             "name": "quantity",
             "title": data.token + " (Qty)",
             "type": "number",
             "classes": "text-right",
             "formatter": OrderAmountColumn
-        }, {
+        },
+        //{ "name": "sumQuantity", "title": data.token + " (SumQty)", "type": "number", "classes": "text-right", "formatter": OrderAmountColumn },
+        {
             "name": "amountLocked",
             "title": "HIVE",
             "type": "number",
@@ -298,7 +322,7 @@
             "classes": "text-right",
             "formatter": HiveAmountColumn
         }],
-        "rows": data.sell_orders.slice(0, 15)
+        "rows": data.sell_orders
     });
 
     $('#sell_order_table').on("click", 'tr', function() {
@@ -317,7 +341,7 @@
             "formatter": function (value, options, rowdata) {
                 var actions = $('<div/>');
                 var cbTxId = $('<input type="checkbox" class="cbTxId" value="' + rowdata.txId + '" />').appendTo(actions);
-                var hfTxType = $('<input type="hidden" class="txType txType_' + rowdata.txId + '" value="' + rowdata.type + '" />').appendTo(actions);                
+                var hfTxType = $('<input type="hidden" class="txType txType_' + rowdata.txId + '" value="' + rowdata.type + '" />').appendTo(actions);
 
                 return actions;
             }
@@ -386,7 +410,10 @@
         }, {
             "name": "txId",
             "title": "ID"
-        }, {
+        },
+        { "name": "seller", "title": "Seller" },
+        { "name": "buyer", "title": "Buyer" },
+        {
             "name": "type",
             "title": "Type",
             "formatter": OrderTypeColumn
@@ -492,7 +519,7 @@
                         // Boolean to enable panning
                         enabled: true,
 
-                        // Panning directions. Remove the appropriate direction to disable 
+                        // Panning directions. Remove the appropriate direction to disable
                         // Eg. 'y' would only allow panning in the y direction
                         mode: 'xy'
                     },
@@ -502,7 +529,7 @@
                         // Boolean to enable zooming
                         enabled: true,
 
-                        // Zooming directions. Remove the appropriate direction to disable 
+                        // Zooming directions. Remove the appropriate direction to disable
                         // Eg. 'y' would only allow zooming in the y direction
                         mode: 'xy',
                     }
@@ -540,7 +567,7 @@
                         // Boolean to enable panning
                         enabled: true,
 
-                        // Panning directions. Remove the appropriate direction to disable 
+                        // Panning directions. Remove the appropriate direction to disable
                         // Eg. 'y' would only allow panning in the y direction
                         mode: 'xy'
                     },
@@ -550,7 +577,7 @@
                         // Boolean to enable zooming
                         enabled: true,
 
-                        // Zooming directions. Remove the appropriate direction to disable 
+                        // Zooming directions. Remove the appropriate direction to disable
                         // Eg. 'y' would only allow zooming in the y direction
                         mode: 'xy',
                     }

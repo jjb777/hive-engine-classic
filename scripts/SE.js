@@ -183,11 +183,11 @@ SE = {
         let precision = token.precision
 
         let tasks = [];
-        tasks.push(ssc.find('market', 'buyBook', { symbol: symbol }, 200, 0, [{ index: 'priceDec', descending: true }], false));
-        tasks.push(ssc.find('market', 'sellBook', { symbol: symbol }, 200, 0, [{ index: 'priceDec', descending: false }], false));
-        tasks.push(ssc.find('market', 'tradesHistory', { symbol: symbol }, 30, 0, [{ index: '_id', descending: true }], false));                       
+        tasks.push(ssc.find('market', 'buyBook', { symbol: symbol }, 100, 0, [{ index: 'priceDec', descending: true }], false));
+        tasks.push(ssc.find('market', 'sellBook', { symbol: symbol }, 500, 0, [{ index: 'priceDec', descending: false }], false));
+        tasks.push(ssc.find('market', 'tradesHistory', { symbol: symbol }, 100, 0, [{ index: '_id', descending: true }], false));                       
 
-        let marketHistoryGet = Config.HISTORY_API + 'marketHistory?symbol=' + symbol;        
+        let marketHistoryGet = Config.HISTORY_API + 'marketHistory?symbol=' + symbol;
         tasks.push($.get(marketHistoryGet));
 
         if (account) {
@@ -195,7 +195,7 @@ SE = {
             tasks.push(ssc.find('market', 'sellBook', { symbol: symbol, account: account }, 100, 0, [{ index: '_id', descending: true }], false));
             tasks.push(ssc.find('tokens', 'balances', { account: account, symbol: { '$in': [symbol, 'SWAP.HIVE'] } }, 2, 0, '', false));
         }
-        
+
         Promise.all(tasks).then(results => {
             // prepare buy orders
             var buy_total = 0;
@@ -220,7 +220,7 @@ SE = {
                 return o;
             });
 
-            const limitCandleStick = 60;            
+            const limitCandleStick = 60;
             let market_history = results[3].slice(0, limitCandleStick).map(x => {
                 return {
                     t: moment.unix(x.timestamp).format('YYYY-MM-DD HH:mm:ss'), //x.timestamp * 1000,
@@ -230,7 +230,7 @@ SE = {
                     c: x.closePrice,
                 }
             });
-            
+
             let user_orders = [];
             let user_token_balance = null;
             let user_hive_balance = null;
@@ -337,10 +337,10 @@ SE = {
         }
     },
 
-    SendCancelMarketOrderSelected: async function (orders, origin = 'market') {        
+    SendCancelMarketOrderSelected: async function (orders, origin = 'market') {
         let successCount = 0;
         let symbol = "";
-        if (orders && orders.length > 0) {            
+        if (orders && orders.length > 0) {
             SE.ShowLoading();
 
             var transaction_data = [];
@@ -359,7 +359,7 @@ SE = {
                         "id": orderId
                     }
                 });
-            }   
+            }
 
             let orderRes = await new Promise(function (resolve, reject) {
                 var username = localStorage.getItem('username');
@@ -373,10 +373,10 @@ SE = {
 
                 // the function is executed automatically when the promise is constructed
                 if (useKeychain()) {
-                    hive_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Cancel Orders', function (response) {                            
+                    hive_keychain.requestCustomJson(username, Config.CHAIN_ID, 'Active', JSON.stringify(transaction_data), 'Cancel Orders', function (response) {
                         if (response.success && response.result) {
                             SE.ShowToast(true, 'Please wait until the transaction is verified.');
-                                
+
                             let txId = response.result.id;
 
                             // check last transaction in case bulk cancellation
@@ -384,7 +384,7 @@ SE = {
                             if (orders.length > 1) {
                                 txId = response.result.id + "-" + (orders.length-1).toString();
                             }
-                            
+
                             SE.CheckTransaction(txId, 3, tx => {
                                 if (tx.success) {
                                     SE.ShowToast(true, 'Cancel orders completed');
@@ -392,7 +392,7 @@ SE = {
                                 } else {
                                     SE.ShowToast(false, 'An error occurred cancelling the order: ' + tx.error)
                                     resolve(false);
-                                }                                    
+                                }
                             });
                         } else {
                             resolve(false);
@@ -403,12 +403,12 @@ SE = {
                     SE.HideLoading();
                     SE.HideDialog();
                 }
-            });       
+            });
 
-            if (orderRes) {                    
-                successCount++;                    
+            if (orderRes) {
+                successCount++;
             }
-            
+
             SE.HideLoading();
             SE.HideDialog();
 
@@ -580,8 +580,8 @@ SE = {
             tasks.push(ssc.find('market', 'buyBook', { account: account }, 100, 0, [{ index: '_id', descending: true }], false));
             tasks.push(ssc.find('market', 'sellBook', { account: account }, 100, 0, [{ index: '_id', descending: true }], false));
         }
-        
-        Promise.all(tasks).then(results => {            
+
+        Promise.all(tasks).then(results => {
             let user_orders = [];
             let user_token_balance = null;
             let user_hive_balance = null;
@@ -602,7 +602,7 @@ SE = {
                 user_orders = user_buy_orders.concat(user_sell_orders);
                 user_orders.sort((a, b) => b.timestamp - a.timestamp);
 
-                SE.ShowHomeView('open_orders', { orders: user_orders, account: account }, { a: account });    
+                SE.ShowHomeView('open_orders', { orders: user_orders, account: account }, { a: account });
                 SE.HideLoading();
             }
         });
@@ -678,7 +678,7 @@ SE = {
 
         const username = SE.User.name;
         const scotTokens = SE.User.ScotTokens;
-        
+
         if (scotTokens && scotTokens.length > 0) {
             let claimData = [];
 
@@ -714,7 +714,7 @@ SE = {
             }
         } else {
             SE.HideLoading();
-        }                
+        }
     },
 
     EnableStaking: function(symbol, unstakingCooldown, numberTransactions) {
@@ -1194,7 +1194,7 @@ SE = {
         SE.LoadPendingUnstakes(username);
         SE.LoadPendingUndelegations(username);
 
-        SE.GetScotUserTokens(username, scotTokens => {            
+        SE.GetScotUserTokens(username, scotTokens => {
             if (scotTokens.length) {
                 var rewardCount = scotTokens.length;
                 for (let st of scotTokens) {
