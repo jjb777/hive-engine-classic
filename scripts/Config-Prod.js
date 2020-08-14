@@ -9,7 +9,7 @@ Config = {
     HISTORY_API: 'https://accounts.hive-engine.com/',
     NATIVE_TOKEN: 'BEE',
     STEEMP_ACCOUNT: 'steem-peg',
-    DISABLED_TOKENS: ['BTC', 'LTC', 'STEEM', 'SBD', 'BCC', 'XAP', 'XRP', 'GOLOS', 'DISNEY', 'AMAZON', 'VOICE', 'ETH', 'EOS', 'TIME', 'DONE', 'BNB'],
+    DISABLED_TOKENS: ['BTC', 'LTC', 'STEEM', 'SBD', 'BCC', 'XAP', 'XRP', 'GOLOS', 'DISNEY', 'AMAZON', 'VOICE', 'ETH', 'EOS', 'TIME', 'DONE', 'BNB', 'BLURT'],
     PEGGED_TOKEN: 'SWAP.HIVE',
     PEGGED_TOKENS: [{
             name: 'Steem',
