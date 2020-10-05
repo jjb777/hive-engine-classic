@@ -1,14 +1,14 @@
 Config = {
     MAINTENANCE_MODE: false,
-    CHAIN_ID: 'ssc-mainnet-hive',
+    CHAIN_ID: 'beeab0de00000000000000000000000000000000000000000000000000000000',
     RPC_URL: 'https://api.hive-engine.com/rpc',
     ACCOUNTS_API_URL: 'https://accounts.hive-engine.com/accountHistory',
     CONVERTER_API: 'https://converter-api.hive-engine.com/api',
     SCOT_API: 'https://scot-api.steem-engine.com/',
     NODE_API: 'https://node-api.hive-engine.com/v1/',
     HISTORY_API: 'https://accounts.hive-engine.com/',
-    NATIVE_TOKEN: 'SSC',
-    STEEMP_ACCOUNT: 'steemsc',
+    NATIVE_TOKEN: 'BEE',
+    STEEMP_ACCOUNT: 'honey-swap',
     DISABLED_TOKENS: ['BTC', 'LTC', 'STEEM', 'SBD', 'BCC', 'XAP', 'XRP', 'GOLOS', 'DISNEY', 'AMAZON', 'VOICE', 'ETH', 'EOS', 'TIME', 'DONE', 'BNB'],
     PEGGED_TOKEN: 'SWAP.HIVE',
     PEGGED_TOKENS: [{
