@@ -52,7 +52,7 @@
   $('#lockedStake').text(addCommas(lockedStake.toFixed(token.precision)) + ' ' + symbol);
 
   $balance.on('click', function() {
-    $stakeAmount.val(availableBalance);
+    $stakeAmount.val(availableBalance.toFixed(token.precision));
   });
 
 
