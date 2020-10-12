@@ -80,12 +80,12 @@
                 <div class="group mt-2 pl-1 pr-2">
                     <span class="small float-left">
 						<small class="text-info">Your Balance:
-							<a id="user-steemp-balance" class="font-weight-bold text-dark"><%= data.user_hive_balance ? addCommas(parseFloat(data.user_hive_balance.balance)) + ' HIVE' : '-' %></a>
+							<button id="user-steemp-balance" onclick="$('#buyQuantity').val((data.user_hive_balance.balance / data.sell_orders[0].price).toFixed(data.precision)); UpdateBuyOrderTotal();" class="btn btn-link font-weight-bold text-dark" style="font-size: unset; padding: unset;"><%= data.user_hive_balance ? addCommas(parseFloat(data.user_hive_balance.balance)) + ' HIVE' : '-' %></button>
 						</small>
 						<br>
 						<small class="text-info">Lowest Ask:
 							<% if(data.sell_orders && data.sell_orders.length > 0) { %>
-								<button id="lowest-ask" onclick="$('#buyPrice').val(data.sell_orders[0].price);" type="button" class="btn btn-link font-weight-bold text-dark" style="font-size: unset; padding: unset;"><%= data.sell_orders[0].price %></button>
+								<button id="lowest-ask" onclick="$('#buyPrice').val(data.sell_orders[0].price); UpdateBuyOrderTotal();" type="button" class="btn btn-link font-weight-bold text-dark" style="font-size: unset; padding: unset;"><%= data.sell_orders[0].price %></button>
 							<% } else { %>
 								<span class="font-weight-bold text-dark">-</span>
                     <% } %>
@@ -136,10 +136,10 @@
                 </div>
                 <div class="group mt-2 pl-1 pr-2">
                     <span class="small float-left">
-						<small class="text-info">Your Balance: <a id="user-token-balance" onclick="btnSubmitOrder('sell');" class="font-weight-bold text-dark"><%= data.user_token_balance ? addCommas(parseFloat(data.user_token_balance.balance)) + ' ' + data.token : '-' %></a></small><br>
+						<small class="text-info">Your Balance: <button id="user-token-balance" onclick="$('#sellQuantity').val(data.user_token_balance.balance); UpdateSellOrderTotal();" class="btn btn-link font-weight-bold text-dark" style="font-size: unset; padding: unset;"><%= data.user_token_balance ? addCommas(parseFloat(data.user_token_balance.balance)) + ' ' + data.token : '-' %></button></small><br>
 						<small class="text-info">Highest Bid:
 							<% if(data.buy_orders && data.buy_orders.length > 0) { %>
-								<button id="highest-bid" onclick="$('#sellPrice').val(data.buy_orders[0].price);" type="button" class="btn btn-link font-weight-bold text-dark" style="font-size: unset; padding: unset;"><%= data.buy_orders[0].price %></button>
+								<button id="highest-bid" onclick="$('#sellPrice').val(data.buy_orders[0].price); UpdateSellOrderTotal();" type="button" class="btn btn-link font-weight-bold text-dark" style="font-size: unset; padding: unset;"><%= data.buy_orders[0].price %></button>
 							<% } else { %>
 								<span class="font-weight-bold text-dark">-</span>
                     <% } %>
