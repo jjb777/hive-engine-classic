@@ -33,18 +33,18 @@
 		const delegationsOut = userToken && userToken.delegationsOut ? parseFloat(userToken.delegationsOut).toFixed(token.precision) : 0;
 		const pendingUnstake = userToken && userToken.pendingUnstake ? parseFloat(userToken.pendingUnstake).toFixed(token.precision) : 0;
 		const pendingUndelegations = userToken && userToken.pendingUndelegations ? parseFloat(userToken.pendingUndelegations).toFixed(token.precision) : 0;
-
+	    const token_data = data.find(d => d.symbol == rowdata.symbol);
 		return `<i class="fas fa-info-circle" title="Token information" onclick="SE.ShowDialog('token_info', SE.GetToken('${value}'));"></i>&nbsp;&nbsp;&nbsp;
 			<i class="fas fa-exchange-alt" title="Token market" onclick="SE.ShowMarket('${value}');"></i>&nbsp;&nbsp;&nbsp;
 			<i class="fas fa-share-square" title="Send tokens" onclick="SE.ShowSendTokenDialog('${value}', ${rowdata.balance});"></i>&nbsp;&nbsp;&nbsp; 
 			<i class="fas fa-list-ul" title="Show token history" onclick="SE.ShowHistory('${value}', '${rowdata.name}')"></i>
 			${token.stakingEnabled && rowdata.balance > 0 ? `&nbsp;&nbsp;&nbsp;<i class="fas fa-lock" title="Stake Tokens" onclick="SE.ShowStakeDialog('${value}', ${rowdata.balance})"></i>` : ``}
-			${token.stakingEnabled && rowdata.stake ? `&nbsp;&nbsp;&nbsp;<i class="fas fa-unlock" title="Unstake Tokens" onclick="SE.ShowUnstakeDialog('${value}', ${rowdata.stake})"></i>` : ``}
+        ${token.stakingEnabled && parseFloat(token_data.availableStake) > 0 ? `&nbsp;&nbsp;&nbsp;<i class="fas fa-unlock" title="Unstake Tokens" onclick="SE.ShowUnstakeDialog('${value}', ${rowdata.stake})"></i>` : ``}
 			${token.issuer === SE.User.name && !stakingEnabled ? `&nbsp;&nbsp;&nbsp;<i class="fas fa-gem" title="Enable Staking" onclick="SE.ShowEnableStakeDialog('${value}')"></i>` : ''}
 			${pendingUnstake > 0 ? `&nbsp;&nbsp;&nbsp;<i class="fas fa-eye" title="View pending unstakes" onclick="SE.ShowHomeView('pending_unstakes')"></i>` : ``}
 			${pendingUndelegations > 0 ? `&nbsp;&nbsp;&nbsp;<i class="fas fa-divide" title="View pending undelegations" onclick="SE.ShowHomeView('pending_undelegations')"></i>` : ``}
 			${scotConfig && scotConfig.pending_token > 0 ? `&nbsp;&nbsp;&nbsp;<i class="fas fa-hand-holding-usd" onclick="SE.ClaimToken('${value}')" title="Claim ${value} tokens"></i>` : ``}
-			${delegationEnabled && token.stakingEnabled && rowdata.stake ? `&nbsp;&nbsp;&nbsp;<i class="fas fa-arrows-alt-h" onclick="SE.ShowDelegateDialog('${value}', ${rowdata.stake})" title="Delegate ${rowdata.stake} tokens"></i>` : ``}
+        ${delegationEnabled && token.stakingEnabled && parseFloat(token_data.availableStake) > 0 ? `&nbsp;&nbsp;&nbsp;<i class="fas fa-arrows-alt-h" onclick="SE.ShowDelegateDialog('${value}', ${rowdata.stake})" title="Delegate ${token_data.availableStake} tokens"></i>` : ``}
 			${token.issuer === SE.User.name && !delegationEnabled && stakingEnabled ? `&nbsp;&nbsp;&nbsp;<i class="fas fa-dolly" title="Enable Delegation" onclick="SE.ShowEnableDelegationDialog('${value}')"></i>` : ''}
 			${delegationEnabled && delegationsOut > 0 ? `&nbsp;&nbsp;&nbsp;<i class="fas fa-folder-minus" title="Undelegate Tokens" onclick="SE.ShowUndelegateDialog('${value}', ${delegationsOut})"></i>` : ``}
 			`; 
@@ -71,11 +71,13 @@
 		const parsedAmount = parseFloat(value);
 
 		if (typeof token.stakingEnabled !== 'undefined' && token.stakingEnabled) {
-			var text = `<span>${+value.toFixed(token.precision)}`;
+            const stakeBalanceStr = +value.toFixed(token.precision);
+			var text = `<span>${stakeBalanceStr}`;
 			var token_data = data.find(d => d.symbol == rowdata.symbol);
 
-			if(token_data.pendingUnstake)
-				text += ' (' + (+parseFloat(token_data.pendingUnstake).toFixed(token.precision)) + ')';
+            if (token_data.availableStake != stakeBalanceStr) {
+		      text += ' (' + (+parseFloat(token_data.availableStake)) + ')';
+            }
 
 			return text + '</span>';
 		}
@@ -87,6 +89,12 @@
 	
 	data = data.map(d => {
 		const token = SE.Tokens.find(t => t.symbol == d.symbol);
+        let availableStake = d.stake;
+        let lockedStake = 0;
+        if (token.stakingEnabled) {
+          lockedStake = SE.User.pendingUnstakes.filter(unstake => unstake.symbol === d.symbol && unstake.numberTransactionsLeft > 1).map(unstake => parseFloat(unstake.quantityLeft) - parseFloat((parseFloat(unstake.quantity) / token.numberTransactions).toFixedNoRounding(token.precision))).reduce((x,y) => x+y, 0);
+          availableStake = Math.max(0, parseFloat(availableStake) - lockedStake).toFixed(token.precision);
+        }
 
 		const scotConfig = (Object.keys(SE.User.ScotTokens).length && typeof SE.User.ScotTokens[token.symbol] !== 'undefined') 
 			? SE.User.ScotTokens[token.symbol] : null;
@@ -96,6 +104,8 @@
 			lastPrice: token.lastPrice, 
 			priceChangePercent: token.priceChangePercent,
 			usdValue: usdFormat(d.balance * token.lastPrice, 2),
+            availableStake: availableStake,
+            lockedStake: lockedStake,
 			scotConfig
 		});
 	});

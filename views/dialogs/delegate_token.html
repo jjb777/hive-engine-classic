@@ -9,10 +9,14 @@
       </div>
   
       <div class="modal-body">
-        <label class="mb-0">STAKED</label>
+        <label class="mb-0">STAKED AVAILABLE</label>
         <p class="mb-4">
           <span id="balance"><%= addCommas(data.balance) %> <%= data.symbol %></span>
         </p>
+        <label class="mb-0">STAKED LOCKED IN UNSTAKES</label>
+        <p class="mb-4">
+          <span id="lockedStake">0 <%= data.symbol %></span>
+		</p>
         
         <label>TO</label>
         <div class="input-group justify-content-center align-items-center mb-4">
@@ -41,13 +45,20 @@
     var isValid = true;
     var balance = "<%= data.balance %>";
     var symbol = "<%= data.symbol %>";
-  
+
+    var token = SE.GetToken(symbol);
+    var lockedStake = SE.User.pendingUnstakes.filter(unstake => unstake.symbol === symbol && unstake.numberTransactionsLeft > 1).map(unstake => parseFloat(unstake.quantityLeft) - parseFloat((parseFloat(unstake.quantity) / token.numberTransactions).toFixedNoRounding(token.precision))).reduce((x,y) => x+y, 0);
+    var availableBalance = Math.max(0, parseFloat(balance) - lockedStake);
+
     var $balance = $('#balance');
     var $delegateAmount = $('#delegateAmount');
     var $delegateTo = $('#delegateTo');
+
+    $balance.text(addCommas(availableBalance.toFixed(token.precision)) + ' ' + symbol);
+    $('#lockedStake').text(addCommas(lockedStake.toFixed(token.precision)) + ' ' + symbol);
   
     $balance.on('click', function() {
-      $delegateAmount.val(balance);
+      $delegateAmount.val(availableBalance.toFixed(token.precision));
     });
   
     function onStakeClick() {
