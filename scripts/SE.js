@@ -1230,18 +1230,19 @@ SE = {
             });
         } else {
             try {
-                if (key && !steem.auth.isWif(key)) {
-                    key = steem.auth.getPrivateKeys(username, key, ['posting']).posting;
+                if (key && !hive.auth.isWif(key)) {
+                    key = hive.auth.getPrivateKeys(username, key, ['posting']).posting;
                 }
             } catch (err) {
                 SE.ShowToast(false, 'Invalid private key or master password.');
                 return;
             }
 
-            hive.api.getAccounts([username], function(e, r) {
-                if (r && r.length > 0) {
+            hive.api.getAccounts([username], function (e, r) {
+                console.log(r);
+                if (r && r.length > 0) {                    
                     try {
-                        if (steem.auth.wifToPublic(key) == r[0].memo_key || steem.auth.wifToPublic(key) == r[0].posting.key_auths[0][0]) {
+                        if (hive.auth.wifToPublic(key) == r[0].memo_key || hive.auth.wifToPublic(key) == r[0].posting.key_auths[0][0]) {
                             localStorage.setItem('username', username);
                             window.location.reload();
                         } else {
