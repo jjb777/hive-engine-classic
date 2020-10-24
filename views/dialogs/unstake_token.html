@@ -47,7 +47,7 @@
   var $balance = $('#balance');
   var $stakeAmount = $('#stakeAmount');
 
-  var availableBalance = parseFloat(balance) - lockedStake;
+  var availableBalance = Math.max(0, parseFloat(balance) - lockedStake);
   $balance.text(addCommas(availableBalance.toFixed(token.precision)) + ' ' + symbol);
   $('#lockedStake').text(addCommas(lockedStake.toFixed(token.precision)) + ' ' + symbol);
 
