@@ -1185,7 +1185,7 @@ SE = {
         $('#nav_wallet').show();
 
         // Load the steem account info
-        steem.api.getAccounts([username], (e, r) => {
+        hive.api.getAccounts([username], (e, r) => {
             if (r && !e && r.length > 0)
                 SE.User.account = r[0];
         });
@@ -1230,18 +1230,19 @@ SE = {
             });
         } else {
             try {
-                if (key && !steem.auth.isWif(key)) {
-                    key = steem.auth.getPrivateKeys(username, key, ['posting']).posting;
+                if (key && !hive.auth.isWif(key)) {
+                    key = hive.auth.getPrivateKeys(username, key, ['posting']).posting;
                 }
             } catch (err) {
                 SE.ShowToast(false, 'Invalid private key or master password.');
                 return;
             }
 
-            steem.api.getAccounts([username], function(e, r) {
-                if (r && r.length > 0) {
+            hive.api.getAccounts([username], function (e, r) {
+                console.log(r);
+                if (r && r.length > 0) {                    
                     try {
-                        if (steem.auth.wifToPublic(key) == r[0].memo_key || steem.auth.wifToPublic(key) == r[0].posting.key_auths[0][0]) {
+                        if (hive.auth.wifToPublic(key) == r[0].memo_key || hive.auth.wifToPublic(key) == r[0].posting.key_auths[0][0]) {
                             localStorage.setItem('username', username);
                             window.location.reload();
                         } else {
@@ -1560,7 +1561,7 @@ SE = {
         };
 
         if (useKeychain()) {
-            hive_keychain.requestTransfer(SE.User.name, 'steemsc', (amount).toFixedNoRounding(3), JSON.stringify(transaction_data), 'HIVE', function(response) {
+            hive_keychain.requestTransfer(SE.User.name, 'honey-swap', (amount).toFixedNoRounding(3), JSON.stringify(transaction_data), 'HIVE', function(response) {
                 if (response.success && response.result) {
                     SE.CheckTransaction(response.result.id, 3, tx => {
                         if (tx.success) {
@@ -1576,7 +1577,7 @@ SE = {
             });
         } else {
             SE.HideLoading();
-            SE.HiveSignerTransfer(SE.User.name, 'steemsc', (amount).toFixedNoRounding(3) + ' HIVE', JSON.stringify(transaction_data), () => {
+            SE.HiveSignerTransfer(SE.User.name, 'honey-swap', (amount).toFixedNoRounding(3) + ' HIVE', JSON.stringify(transaction_data), () => {
                 SE.LoadBalances(SE.User.name, () => SE.ShowHistory(Config.NATIVE_TOKEN, 'Hive Engine Tokens'));
             });
         }
@@ -1737,7 +1738,7 @@ SE = {
     },
 
     CheckAccount: function(name, callback) {
-        steem.api.getAccounts([name], (e, r) => {
+        hive.api.getAccounts([name], (e, r) => {
             if (r && r.length > 0)
                 callback(r[0]);
             else

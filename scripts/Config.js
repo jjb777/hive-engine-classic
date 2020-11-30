@@ -9,7 +9,7 @@ Config = {
     HISTORY_API: 'https://accounts.hive-engine.com/',
     NATIVE_TOKEN: 'BEE',
     STEEMP_ACCOUNT: 'honey-swap',
-    DISABLED_TOKENS: ['BTC', 'LTC', 'STEEM', 'SBD', 'HIVE', 'HBD', 'BCC', 'XAP', 'XRP', 'GOLOS', 'DISNEY', 'AMAZON', 'VOICE', 'ETH', 'EOS', 'TIME', 'DONE', 'BNB', 'LASSE', 'R', 'SCTR', 'ALLAH', 'ETHER', 'LTCPEG', 'SBC', 'TEST.EON', 'BEEHIVE', 'BEECASH', 'SPL.FUND'],
+    DISABLED_TOKENS: ['BTC', 'LTC', 'STEEM', 'SBD', 'HIVE', 'HBD', 'BCC', 'XAP', 'XRP', 'GOLOS', 'DISNEY', 'AMAZON', 'VOICE', 'ETH', 'EOS', 'TIME', 'DONE', 'BNB', 'LASSE', 'R', 'SCTR', 'ALLAH', 'ETHER', 'LTCPEG', 'SBC', 'TEST.EON', 'BEEHIVE', 'BEECASH', 'SPL.FUND', 'ATOM.TOKEN', 'DSWAP', 'LEOG', 'PAK'],
     PEGGED_TOKEN: 'SWAP.HIVE',
     PEGGED_TOKENS: [{
             name: 'Hive',
@@ -71,11 +71,11 @@ Config = {
             symbol: 'DOGE',
             pegged_token_symbol: 'SWAP.DOGE'
         },
-        {
-            name: 'Telos',
-            symbol: 'TLOS',
-            pegged_token_symbol: 'SWAP.TLOS'
-        },
+        //{
+        //    name: 'Telos',
+        //    symbol: 'TLOS',
+        //    pegged_token_symbol: 'SWAP.TLOS'
+        //},
         {
             name: 'Sand',
             symbol: 'EOSSAND',
