@@ -15,16 +15,18 @@
             <p class="text-medium"><strong>Please note:</strong> Large withdrawals are processed manually to ensure financial safety of collective assets and may take up to 1-3 days to complete</p>
 
             <p class="text-medium wekuWarning" style="display: none;">You are going to remove WEKUP from <strong>Steem-Engine</strong> and receive WEKU on <strong>Bitshares</strong>.</p>
-            <p class="text-medium wekuWarning" style="display: none;">Please note we own the steem-engine account on <strong>Bitshares</strong>, but not the steem-engine account on <strong>WEKU</strong>. Any and all transfers you complete to the steem-engine account on WEKU are to a known scammer and will not
-                be refunded.</p>
+            <p class="text-medium wekuWarning" style="display: none;">
+                Please note we own the steem-engine account on <strong>Bitshares</strong>, but not the steem-engine account on <strong>WEKU</strong>. Any and all transfers you complete to the steem-engine account on WEKU are to a known scammer and will not
+                be refunded.
+            </p>
 
             <label>TOKEN TO WITHDRAW</label>
             <div class="input-group mb-4">
                 <select id="withdrawal_token">
-                        <% Config.PEGGED_TOKENS.forEach(token => { %>
-                        <option value="<%= token.symbol %>"><%= token.name %> (<%= token.symbol %>)</option>
-                        <% }); %>
-                    </select>
+                    <% Config.PEGGED_TOKENS.forEach(token => { %>
+                    <option value="<%= token.symbol %>"><%= token.name %> (<%= token.symbol %>)</option>
+                    <% }); %>
+                </select>
             </div>
 
             <label class="mb-0">Current Balance</label>
@@ -49,8 +51,13 @@
                 <input type="text" id="withdraw_address" value="<%= SE.User.name %>" disabled="disabled" />
                 <div class="invalid-tooltip" id="error_response"></div>
             </div>
-            <div class="ssc-cost">Please ensure this address is correct.<br/>We cannot refund incorrect withdrawals.</div>
+            <div class="ssc-cost">Please ensure this address is correct.<br />We cannot refund incorrect withdrawals.</div>
 
+            <label>MEMO</label>
+            <div class="input-group justify-content-center align-items-center">
+                <input type="text" id="memo" value="" />
+            </div>
+            <div class="ssc-cost">If memo is required, please ensure this memo is correct.<br />We cannot refund incorrect withdrawals.</div>
         </div>
 
         <div class="modal-footer" style="padding-bottom: 0;">
@@ -82,7 +89,7 @@
                 SE.WithdrawSteem(amount);
             else {
                 $('#error_response').text('');
-                SE.GetWithdrawalAddress(token.symbol, $('#withdraw_address').val(), (err, result) => {
+                SE.GetWithdrawalAddress(token.symbol, $('#withdraw_address').val(), $("#memo").val(), (err, result) => {
                     if (err) {
                         $('#withdraw_address').addClass('is-invalid');
                         $('#error_response').text(err.responseJSON.message);
