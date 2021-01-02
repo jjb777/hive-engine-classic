@@ -1788,16 +1788,18 @@ SE = {
         });
     },
 
-    GetWithdrawalAddress: function(symbol, address, callback) {
-        var pegged_token = Config.PEGGED_TOKENS.find(p => p.symbol == symbol);
+    GetWithdrawalAddress: function(symbol, address, memo, callback) {
+        var pegged_token = Config.PEGGED_TOKENS.find(p => p.symbol == symbol);        
 
         if (!pegged_token)
             return;
 
+        var dataToPost = { from_coin: pegged_token.pegged_token_symbol, to_coin: symbol, destination: address };        
+
         $.ajax({
             url: Config.CONVERTER_API + '/convert/',
             type: 'POST',
-            data: JSON.stringify({ from_coin: pegged_token.pegged_token_symbol, to_coin: symbol, destination: address }),
+            data: JSON.stringify(dataToPost),
             contentType: "application/json",
             dataType: "json",
             error: (xhr, status, errorThrown) => {
@@ -1806,6 +1808,9 @@ SE = {
                 }
             },
             success: result => {
+                if (memo)
+                    result.memo = result.memo + ' ' + memo;
+
                 if (callback)
                     callback(null, Object.assign(result, pegged_token));
             }
